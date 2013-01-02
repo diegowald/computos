@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="Nombre">
+  <author>
+    <name></name>
+    <email></email>
+  </author>
+  <owner>Propietario</owner>
+  <address>Diereccion</address>
+  <telephone>Telefono</telephone>
+  <email>email</email>
+  <notes>Notas</notes>
+  <elements count="2">
+    <part name="123345">
+      <quantity name="Circular Surface">
+        <value>10</value>
+      </quantity>
+      <element>mezcla</element>
+    </part>
+    <part>
+      <name>234234234</name>
+      <quantity name="Cilinder">
+        <radius>10</radius>
+        <height>5</height>
+      </quantity>
+      <element>REVOQUE GRUESO ANTIHUMEDAD</element>
+    </part>
+  </elements>
+</project>

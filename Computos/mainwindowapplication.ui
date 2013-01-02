@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindowApplication</class>
+ <widget class="QMainWindow" name="MainWindowApplication">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>800</width>
+    <height>600</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Metric</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="recursos.qrc">
+    <normaloff>:/dlg/dock/main</normaloff>:/dlg/dock/main</iconset>
+  </property>
+  <property name="dockOptions">
+   <set>QMainWindow::AllowTabbedDocks|QMainWindow::AnimatedDocks|QMainWindow::VerticalTabs</set>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QHBoxLayout" name="horizontalLayout">
+    <property name="spacing">
+     <number>2</number>
+    </property>
+    <property name="margin">
+     <number>2</number>
+    </property>
+    <item>
+     <widget class="QMdiArea" name="mdiArea"/>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>800</width>
+     <height>29</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menu_File">
+    <property name="title">
+     <string>&amp;Project</string>
+    </property>
+    <addaction name="action_New"/>
+    <addaction name="action_Open"/>
+    <addaction name="action_Save"/>
+    <addaction name="actionSave_As"/>
+    <addaction name="action_Close"/>
+    <addaction name="separator"/>
+    <addaction name="action_Print"/>
+    <addaction name="separator"/>
+    <addaction name="actionE_xit"/>
+   </widget>
+   <widget class="QMenu" name="menuMaterials">
+    <property name="title">
+     <string>&amp;Materials</string>
+    </property>
+    <addaction name="actionEdit_Material_defiinition"/>
+    <addaction name="separator"/>
+    <addaction name="actionCheck_for_Materials_update"/>
+   </widget>
+   <widget class="QMenu" name="menu_Help">
+    <property name="title">
+     <string>&amp;Help</string>
+    </property>
+    <addaction name="action_About"/>
+   </widget>
+   <widget class="QMenu" name="menu_Providers">
+    <property name="title">
+     <string>&amp;Providers</string>
+    </property>
+    <addaction name="action_List"/>
+    <addaction name="separator"/>
+    <addaction name="action_Price_Lists"/>
+    <addaction name="action_Import_Pricelist"/>
+   </widget>
+   <widget class="QMenu" name="menu_Cost_Analysis">
+    <property name="title">
+     <string>&amp;Cost Analysis</string>
+    </property>
+    <addaction name="action_Compute"/>
+   </widget>
+   <addaction name="menu_File"/>
+   <addaction name="menu_Cost_Analysis"/>
+   <addaction name="menuMaterials"/>
+   <addaction name="menu_Providers"/>
+   <addaction name="menu_Help"/>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+  <widget class="QDockWidget" name="dockMateriales">
+   <property name="features">
+    <set>QDockWidget::DockWidgetFloatable|QDockWidget::DockWidgetMovable</set>
+   </property>
+   <property name="windowTitle">
+    <string>Material Library</string>
+   </property>
+   <attribute name="dockWidgetArea">
+    <number>1</number>
+   </attribute>
+   <widget class="QWidget" name="dockWidgetContents_2"/>
+  </widget>
+  <action name="action_New">
+   <property name="icon">
+    <iconset resource="recursos.qrc">
+     <normaloff>:/dlg/dock/images/new.png</normaloff>:/dlg/dock/images/new.png</iconset>
+   </property>
+   <property name="text">
+    <string>&amp;New</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+N</string>
+   </property>
+   <property name="iconVisibleInMenu">
+    <bool>true</bool>
+   </property>
+  </action>
+  <action name="action_Open">
+   <property name="icon">
+    <iconset resource="recursos.qrc">
+     <normaloff>:/dlg/dock/images/open.png</normaloff>:/dlg/dock/images/open.png</iconset>
+   </property>
+   <property name="text">
+    <string>&amp;Open</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+O</string>
+   </property>
+   <property name="iconVisibleInMenu">
+    <bool>true</bool>
+   </property>
+  </action>
+  <action name="action_Close">
+   <property name="text">
+    <string>&amp;Close</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+W</string>
+   </property>
+  </action>
+  <action name="action_Print">
+   <property name="icon">
+    <iconset resource="recursos.qrc">
+     <normaloff>:/dlg/dock/images/print.png</normaloff>:/dlg/dock/images/print.png</iconset>
+   </property>
+   <property name="text">
+    <string>&amp;Print</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+P</string>
+   </property>
+   <property name="iconVisibleInMenu">
+    <bool>true</bool>
+   </property>
+  </action>
+  <action name="actionE_xit">
+   <property name="text">
+    <string>E&amp;xit</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Q, Ctrl+S</string>
+   </property>
+  </action>
+  <action name="actionEdit_Material_defiinition">
+   <property name="icon">
+    <iconset resource="recursos.qrc">
+     <normaloff>:/dlg/dock/images/colors.png</normaloff>:/dlg/dock/images/colors.png</iconset>
+   </property>
+   <property name="text">
+    <string>Edit Material defiinition</string>
+   </property>
+   <property name="iconVisibleInMenu">
+    <bool>true</bool>
+   </property>
+  </action>
+  <action name="action_Save">
+   <property name="icon">
+    <iconset resource="recursos.qrc">
+     <normaloff>:/dlg/dock/images/save.png</normaloff>:/dlg/dock/images/save.png</iconset>
+   </property>
+   <property name="text">
+    <string>&amp;Save</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+S</string>
+   </property>
+   <property name="iconVisibleInMenu">
+    <bool>true</bool>
+   </property>
+  </action>
+  <action name="action_About">
+   <property name="text">
+    <string>&amp;About</string>
+   </property>
+  </action>
+  <action name="action_List">
+   <property name="text">
+    <string>&amp;List</string>
+   </property>
+  </action>
+  <action name="action_Price_Lists">
+   <property name="text">
+    <string>&amp;Price Lists</string>
+   </property>
+  </action>
+  <action name="actionCheck_for_Materials_update">
+   <property name="text">
+    <string>Check for Materials update...</string>
+   </property>
+  </action>
+  <action name="action_Compute">
+   <property name="text">
+    <string>&amp;Compute</string>
+   </property>
+  </action>
+  <action name="action_Import_Pricelist">
+   <property name="text">
+    <string>&amp;Import Pricelist</string>
+   </property>
+  </action>
+  <action name="actionSave_As">
+   <property name="icon">
+    <iconset resource="recursos.qrc">
+     <normaloff>:/dlg/dock/images/save.png</normaloff>:/dlg/dock/images/save.png</iconset>
+   </property>
+   <property name="text">
+    <string>Save &amp;As...</string>
+   </property>
+  </action>
+ </widget>
+ <resources>
+  <include location="recursos.qrc"/>
+ </resources>
+ <connections/>
+</ui>

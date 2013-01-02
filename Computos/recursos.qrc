@@ -1,0 +1,37 @@
+<RCC>
+    <qresource prefix="/dlg/dock">
+        <file alias="ok">images/Button.png</file>
+        <file alias="polygonal">images/bw.png</file>
+        <file>images/colors.png</file>
+        <file alias="copy">images/copy.png</file>
+        <file alias="cut">images/cut.png</file>
+        <file alias="delete">images/edit-delete.png</file>
+        <file alias="open">images/fileopen.xpm</file>
+        <file alias="print">images/fileprint.xpm</file>
+        <file alias="save">images/filesave.xpm</file>
+        <file>images/go-next-view.png</file>
+        <file>images/go-previous-view.png</file>
+        <file>images/new.png</file>
+        <file>images/open.png</file>
+        <file>images/paste.png</file>
+        <file alias="add">images/plus-sign.png</file>
+        <file>images/print.png</file>
+        <file>images/quit.png</file>
+        <file>images/save.png</file>
+        <file>images/view-refresh.png</file>
+        <file alias="rectangularArea">images/RectArea.png</file>
+        <file alias="PolygonalArea">images/PolyArea.png</file>
+        <file alias="TrapecialArea">images/TrapecialArea.png</file>
+        <file alias="time">images/glyphicons_055_stopwatch.png</file>
+        <file alias="lineal">images/glyphicons_068_ruller.png</file>
+        <file alias="areaCircular">images/glyphicons_095_vector_path_circle.png</file>
+        <file alias="computo">images/glyphicons_119_table.png</file>
+        <file alias="search">images/glyphicons_027_search.png</file>
+        <file alias="main">images/glyphicons_059_cargo.png</file>
+        <file alias="calculator">images/glyphicons_323_calculator.png</file>
+        <file alias="loader">images/loader.gif</file>
+        <file alias="dashboard">images/glyphicons_331_dashboard.png</file>
+        <file alias="coins">images/glyphicons_037_coins.png</file>
+        <file alias="value">images/glyphicons_327_sampler.png</file>
+    </qresource>
+</RCC>

@@ -1,0 +1,79 @@
+=============================================================================
+C O D I M A T  S.A. 
+Lista de precios en formato TXT
+=============================================================================
+
+Indice:
+1.-Descripción de los archivos
+2.-Archivo de rubros
+3.-Archivo de subrubros
+4.-Archivo de artículos
+5.-Actualización
+
+
+1.- Descripción de los archivos
+La lista de precios en formato TXT de CODIMAT S.A. ha sido creada y está disponible para
+aquellos que necesiten un archivo plano de texto conteniendo nuestros precios.
+
+El mismo puede ser importado desde una planilla de Excel o desde cualquier otra aplicación
+en la que pueda importar archivos txt.
+
+La lista en formato TXT está compuesta de 3 archivos:
+	- rub_codi.txt = contiene los rubros de la lista de precios
+	- sub_codi.txt = detalla todos los subrubros incluídos en la lista de precios
+	- art_codi.txt = describe los artículos
+
+En los tres archivos cada registro está representado por una línea donde los campos aparecen
+separados por comas (",") y los datos encerrados entre comillas dobles (")
+
+
+2.- Archivo de rubros (rub_codi.txt)
+El archivo de rubros contiene los siguientes campos y en este orden:
+-1º-Código del rubro: 2 caracteres numéricos
+-2º-Orden del rubro: 2 caracteres numéricos Se utiliza para listar en un orden determinado
+-3º-Nombre del rubro: 30 caracteres alfanuméricos
+
+
+
+3.- Archivo de subrubros (sub_codi.txt)
+El archivo de subrubros contiene los siguientes campos y en este orden:
+-1º-Código del rubro: 2 caracteres numéricos Se trata del rubro al que pertenece el subrubro
+-2º-Orden del subrubro: 4 caracteres numéricos Se utiliza para listar en un orden determinado
+-3º-Código del subrubro: 4 caracteres numéricos
+-4º-Nombre del subrubro: 30 caracteres alfanuméricos
+
+
+
+4.- Archivo de artículos (art_codi.txt)
+El archivo de artículos contiene los siguientes campos y en este orden:
+-1º-Código del rubro: 2 caracteres numéricos Se trata del rubro al que pertenece el artículo
+-2º-Código del subrubro: 4 caracteres numéricos Se trata del subrubro al que pertenece el artículo
+-3º-Orden del artículo: 4 caracteres numéricos Se utiliza para listar en un orden determinado
+-4º-Código del artículo: 4 caracteres numéricos
+-5º-Nombre del artículo: 50 caracteres alfanuméricos
+-6º-Precio: incluye IVA y bonificaciones de 34% y 7%
+-7º-Unidades por bulto de facturación: valor con el siguiente formato "###.00"
+-8º-Texto unidad de facturación: 3 caracteres alfabéticos según la siguiente tabla:
+-------KGR------KILOGRAMO
+-------UNI------UNIDAD
+-------PIE------PIE
+-------MTL------METRO LINEAL
+-------MT2------METRO CUADRADO
+-------MT3------METRO CUBICO
+-------ROL------ROLLO
+-------PAQ------PAQUETE
+-------CAJ------CAJA
+-------CJN------CAJON
+
+
+
+5.-La actualización se realiza DIARIAMENTE y está disponible pudiendo descargarse desde nuestra 
+página web en la sección Lista de Precios: www.codimat.com.ar
+
+Y recuerde...
+Cualquier inconveniente no dude en consultarnos a sistemas@codimat.com.ar
+Con sumo agrado atenderemos su inquietud.
+
+Muchas Gracias.
+Área Sistemas.
+CODIMAT S.A.
