@@ -10,8 +10,10 @@ struct Redline
     // seguramente tendra, una pagina,
     // y un rectangulo
     int pageNumber;
-    double x1, y1, x2, y2;
+    QRectF rect;
     QString name;
+    QString author;
+    QColor color;
 };
 
 

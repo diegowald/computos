@@ -23,6 +23,7 @@
 #include "filesettings.h"
 //#include "icon.h"
 //#include "../shortcuthandler/shortcuthandler.h"
+#include "../dlgredline.h"
 
 RedliningHandler::RedliningHandler(RedliningWidget *parent)
     : QObject(parent->widget())
@@ -163,8 +164,16 @@ void RedliningHandler::updateActions()
 void RedliningHandler::insertRedline(int index, Redline redline)
 {
 //	QAction *action = new QAction(tr("Page %1").arg(QString::number(int(pos))), m_bookmarksMenu);
+
+    dlgRedline dlg;
+    if (dlg.exec() == QDialog::Accepted)
+    {
+        redline.name = dlg.Name();
+        redline.color = dlg.Color();
+    }
+
     Q_ASSERT_X(redline.pageNumber < m_pageLabels.size(), "RedliningHandler", "make sure to call setPageLabels() before inserting redlines with insertRedline(), appendRedline(), toggleRedline() or loadRedlines()");
-    QAction *action = new QAction(tr("Page %1").arg(m_pageLabels.at(redline.pageNumber)), m_redlinesMenu);
+    QAction *action = new QAction(tr("Page %1, %2").arg(m_pageLabels.at(redline.pageNumber)).arg(redline.name), m_redlinesMenu);
     action->setData(redline.name);
     connect(action, SIGNAL(triggered()), this, SLOT(goToActionRedline()));
     if (index >= 0 && index < m_redlines.size())
@@ -178,7 +187,7 @@ void RedliningHandler::insertRedline(int index, Redline redline)
         m_redlinesMenu->addAction(action);
     }
     updateActions();
-    Q_EMIT redlineUpdated(redline);
+    emit redlineUpdated(redline);
 }
 
 void RedliningHandler::appendRedline(Redline redline)
@@ -219,7 +228,7 @@ void RedliningHandler::toggleRedline()
             removeRedline(i);
             return;
         }
-/*        else if (m_redlines.at(i) > pos)
+        /*else if (m_redlines.at(i) > pos)
         {
             insertRedline(i, pos);
             return;

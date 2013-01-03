@@ -79,6 +79,8 @@ public:
 #endif // USE_SYNCTEX
 	void scroll(int delta);
 
+    virtual Redline redline() const;
+
 public Q_SLOTS:
 	void slotSelectMouseTool();
     void slotRedliningMouseTool();
@@ -91,6 +93,11 @@ public Q_SLOTS:
 	void slotSynctexJumpToSource();
 #endif // USE_SYNCTEX
 
+    /**
+     * @brief redlineUpdated updates redlines
+     * @param redline the updated redline
+     */
+    void redlineUpdated(Redline redline);
 Q_SIGNALS:
 	void scrollPositionChanged(qreal fraction, int pageNumber);
 	void openTexDocument(const QString &fileName, int lineNumber);
@@ -142,6 +149,7 @@ public:
 	QStringList m_textSelectionWords;
 
     QGraphicsRectItem *m_redliningRect;
+    QList<QGraphicsRectItem *> m_redlineRects;
     QPointF m_redliningStart;
 
 	bool m_showForms;
@@ -153,6 +161,7 @@ public:
 #endif // USE_SYNCTEX
 
 	PrintHandler *m_printHandler;
+    Redline m_Redline;
 };
 
 #endif // PDFVIEWER_PDFVIEW_P_H

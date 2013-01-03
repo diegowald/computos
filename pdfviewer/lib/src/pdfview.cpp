@@ -300,6 +300,7 @@ QAction *PdfView::action(PdfViewAction action)
             d->m_redliningHandler = new RedliningHandler(d);
             d->m_redliningHandler->setPageLabels(d->m_popplerPageLabels);
             connect(d->m_redliningHandler, SIGNAL(goToPosition(double)), d, SLOT(slotSetPage(double)));
+            connect(d->m_redliningHandler, SIGNAL(redlineUpdated(Redline)), d, SLOT(redlineUpdated(Redline)));
             if (!d->m_popplerDocument)
                 d->m_redliningHandler->action(0)->setEnabled(false);
         }
@@ -1334,6 +1335,11 @@ void PdfViewPrivate::handleRedlining(const QPoint &popupMenuPos)
         return;
     redlineRect = q->mapToPage(pageNumber, redlineRect);
 
+    m_Redline.author = "Diego";
+    m_Redline.pageNumber = pageNumber;
+    m_Redline.rect = redlineRect;
+    m_Redline.name = "Hello World";
+
     // show popup menu with copy and save options
     QMenu menu(q);
 // ACA DEBO DEFINIR
@@ -1351,10 +1357,9 @@ void PdfViewPrivate::handleRedlining(const QPoint &popupMenuPos)
     {
         if (choice == createRedlineAction)
         {
-aca tendria que ejecutar la accion de crear un nuevo redline
-        y pasarle las coordenadas del rectangulo creado.
+            m_redliningHandler->action(0)->trigger();
         }
-        else if (choice == copyImageAction || choice == saveImageAction)
+        /*else if (choice == copyImageAction || choice == saveImageAction)
         {
             const double resX = m_dpiX * m_zoomFactor;
             const double resY = m_dpiY * m_zoomFactor;
@@ -1395,8 +1400,13 @@ aca tendria que ejecutar la accion de crear un nuevo redline
             clipboard->setText(text, QClipboard::Clipboard);
             if (clipboard->supportsSelection())
                 clipboard->setText(text, QClipboard::Selection);
-        }
-    }*/
+        }*/
+    }
+}
+
+Redline PdfViewPrivate::redline() const
+{
+    return m_Redline;
 }
 
 void PdfViewPrivate::removeTextSelection()
@@ -1491,6 +1501,26 @@ void PdfView::slotPrint()
     if (!d->m_popplerDocument)
         return;
     d->m_printHandler->print(d->m_popplerDocument, d->m_popplerPages, d->m_fileName, d->m_pageNumber);
+}
+
+
+/*******************************************************************/
+// redline update
+void PdfViewPrivate::redlineUpdated(Redline redline)
+{
+    m_redlineRects.push_back(
+                m_pageScene->addRect(redline.rect,
+                                     QPen(QBrush(QColor(redline.color.red(),
+                                                        redline.color.green(),
+                                                        redline.color.blue(),
+                                                        100)), 1),
+                                     QBrush(QColor(redline.color.red(),
+                                                   redline.color.green(),
+                                                   redline.color.blue(),
+                                                   100))));
+                                     //QPen(QBrush(QColor(100, 0, 0, 100)), 1),
+                                     //QBrush(QColor(100, 0, 0, 100))));
+    m_redlineRects.at(m_redlineRects.size() - 1)->setZValue(3);
 }
 
 /*******************************************************************/
@@ -1791,3 +1821,4 @@ void PdfView::wheelEvent(QWheelEvent *event)
         d->scroll(event->delta());
 }
 #endif // QT_NO_WHEELEVENT
+

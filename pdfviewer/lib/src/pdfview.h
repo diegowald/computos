@@ -294,6 +294,8 @@ public Q_SLOTS:
 	 */
 	void slotPrint();
 
+
+
 Q_SIGNALS:
 	/**
 	 * This signal is emitted when the view's scroll bar's value has changed.

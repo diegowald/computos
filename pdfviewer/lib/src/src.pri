@@ -22,7 +22,8 @@ HEADERS += $${PWD}/utils/bookmarkshandler.h \
 	$${PWD}/pdfview.h \
 	$${PWD}/pdfview_p.h \
 	$${PWD}/printhandler.h \
-        $${PWD}/utils/redlininghandler.h
+        $${PWD}/utils/redlininghandler.h \
+    src/dlgredline.h
 SOURCES += $${PWD}/utils/bookmarkshandler.cpp \
 	$${PWD}/utils/filesettings.cpp \
 	$${PWD}/utils/globallocale.cpp \
@@ -33,7 +34,8 @@ SOURCES += $${PWD}/utils/bookmarkshandler.cpp \
 	$${PWD}/pageitem.cpp \
 	$${PWD}/pdfview.cpp \
 	$${PWD}/printhandler.cpp \
-        $${PWD}/utils/redlininghandler.cpp
+        $${PWD}/utils/redlininghandler.cpp \
+    src/dlgredline.cpp
 use_synctex {
 	HEADERS += $${PWD}/synctex/synctex_parser.h \
 		$${PWD}/synctex/synctex_parser_utils.h \
@@ -42,3 +44,6 @@ use_synctex {
 		$${PWD}/synctex/synctex_parser_utils.c \
 		$${PWD}/synctexhandler.cpp
 }
+
+FORMS += \
+    src/dlgredline.ui
