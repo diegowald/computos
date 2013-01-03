@@ -7,6 +7,10 @@ dlgRedline::dlgRedline(QWidget *parent) :
     ui(new Ui::dlgRedline)
 {
     ui->setupUi(this);
+    // seting default color
+    QPalette palette = ui->frmColor->palette();
+    palette.setColor(ui->frmColor->backgroundRole(), Qt::red);
+    ui->frmColor->setPalette(palette);
 }
 
 dlgRedline::~dlgRedline()

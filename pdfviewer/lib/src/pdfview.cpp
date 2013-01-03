@@ -1328,7 +1328,7 @@ void PdfViewPrivate::handleRedlining(const QPoint &popupMenuPos)
         removeRedlineRect();
         return;
     }
-
+m_Redline.rect = redlineRect;
     // translate selected rectangle to page coordinates
     const int pageNumber = pageNumberAtPosition(m_redliningRect->rect().topLeft());
     if (pageNumber < 0)
@@ -1337,7 +1337,7 @@ void PdfViewPrivate::handleRedlining(const QPoint &popupMenuPos)
 
     m_Redline.author = "Diego";
     m_Redline.pageNumber = pageNumber;
-    m_Redline.rect = redlineRect;
+
     m_Redline.name = "Hello World";
 
     // show popup menu with copy and save options
