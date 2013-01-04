@@ -14,8 +14,9 @@ wndPDFViewer::wndPDFViewer(QWidget *parent) :
     ui->toolBar->addAction(ui->pdfView->action(PdfView::MouseToolSelection));
     ui->toolBar->addAction(ui->pdfView->action(PdfView::Redlines));
     ui->toolBar->addAction(ui->pdfView->action(PdfView::MouseToolRedlining));
-    QAction *action = new QAction("Hola Mundo", this);
-    ui->pdfView->addAction(action);
+    ui->toolBar->addAction(ui->pdfView->action(PdfView::Zoom));
+    ui->toolBar->addAction(ui->pdfView->action(PdfView::ZoomIn));
+    ui->toolBar->addAction(ui->pdfView->action(PdfView::ZoomOut));
 }
 
 wndPDFViewer::~wndPDFViewer()
