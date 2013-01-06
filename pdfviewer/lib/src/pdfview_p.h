@@ -74,6 +74,7 @@ public:
 	void handleTextSelection(const QPoint &popupMenuPos);
 	void removeTextSelection();
     void handleRedlining(const QPoint &popupMenuPos);
+    void reloadRedlines();
 #ifdef USE_SYNCTEX
 	void synctexClick(const QPointF &scenePos);
 #endif // USE_SYNCTEX

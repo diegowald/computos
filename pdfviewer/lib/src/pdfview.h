@@ -336,6 +336,9 @@ protected:
 	virtual void mousePressEvent(QMouseEvent *event);
 	virtual void mouseMoveEvent(QMouseEvent *event);
 	virtual void mouseReleaseEvent(QMouseEvent *event);
+
+    void reloadRedlines();
+
 #ifndef QT_NO_WHEELEVENT
 	virtual void wheelEvent(QWheelEvent *event);
 #endif // QT_NO_WHEELEVENT

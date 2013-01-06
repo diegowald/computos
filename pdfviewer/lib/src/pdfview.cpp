@@ -986,6 +986,12 @@ void PdfView::setZoomFactor(qreal value)
         setPage(d->m_pageNumber);
         vbar->setValue(int(qreal(vbar->maximum()) / oldVMaximum * oldVValue)); // this must be done when oldVValue == oldVMaximum in order to stay at the bottom
     }
+    reloadRedlines();
+}
+
+void PdfView::reloadRedlines()
+{
+    d->reloadRedlines();
 }
 
 void PdfViewPrivate::slotSetZoomFactor(qreal value)
@@ -1328,13 +1334,15 @@ void PdfViewPrivate::handleRedlining(const QPoint &popupMenuPos)
         removeRedlineRect();
         return;
     }
-m_Redline.rect = redlineRect;
+    m_Redline.rect = redlineRect;
+
     // translate selected rectangle to page coordinates
     const int pageNumber = pageNumberAtPosition(m_redliningRect->rect().topLeft());
+
     if (pageNumber < 0)
         return;
     redlineRect = q->mapToPage(pageNumber, redlineRect);
-
+m_Redline.rect =redlineRect;
     m_Redline.author = "Diego";
     m_Redline.pageNumber = pageNumber;
 
@@ -1508,8 +1516,9 @@ void PdfView::slotPrint()
 // redline update
 void PdfViewPrivate::redlineUpdated(Redline redline)
 {
+    QRectF r = q->mapFromPage(redline.pageNumber, redline.rect);
     m_redlineRects.push_back(
-                m_pageScene->addRect(redline.rect,
+                m_pageScene->addRect(r,
                                      QPen(QBrush(QColor(redline.color.red(),
                                                         redline.color.green(),
                                                         redline.color.blue(),
@@ -1521,6 +1530,29 @@ void PdfViewPrivate::redlineUpdated(Redline redline)
                                      //QPen(QBrush(QColor(100, 0, 0, 100)), 1),
                                      //QBrush(QColor(100, 0, 0, 100))));
     m_redlineRects.at(m_redlineRects.size() - 1)->setZValue(3);
+}
+
+void PdfViewPrivate::reloadRedlines()
+{
+    QList<Redline> lines = m_redliningHandler->redlines();
+    m_redlineRects.clear();
+    foreach (Redline line, lines)
+    {
+        QRectF r = q->mapFromPage(line.pageNumber, line.rect);
+        m_redlineRects.push_back(
+                    m_pageScene->addRect(r,
+                                         QPen(QBrush(QColor(line.color.red(),
+                                                            line.color.green(),
+                                                            line.color.blue(),
+                                                            100)), 1),
+                                         QBrush(QColor(line.color.red(),
+                                                       line.color.green(),
+                                                       line.color.blue(),
+                                                       100))));
+                                         //QPen(QBrush(QColor(100, 0, 0, 100)), 1),
+                                         //QBrush(QColor(100, 0, 0, 100))));
+        m_redlineRects.at(m_redlineRects.size() - 1)->setZValue(3);
+    }
 }
 
 /*******************************************************************/
