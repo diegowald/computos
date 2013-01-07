@@ -13,7 +13,7 @@ class wndPDFViewer : public QMainWindow
     Q_OBJECT
     
 public:
-    explicit wndPDFViewer(QWidget *parent = 0);
+    explicit wndPDFViewer(QString filename, QWidget *parent = 0);
     ~wndPDFViewer();
     
 private:

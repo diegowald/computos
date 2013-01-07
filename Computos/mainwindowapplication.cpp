@@ -79,7 +79,7 @@ MainWindowApplication::MainWindowApplication(QWidget *parent) :
     connect(ui->actionE_xit, SIGNAL(triggered()), this, SLOT(exitApp()));
 
     // testing
-    wndPDFViewer *wnd = new wndPDFViewer(this);
+    wndPDFViewer *wnd = new wndPDFViewer("/home/diego/Documents/C++-GUI-Programming-with-Qt-4-1st-ed.pdf", this);
     ui->mdiArea->addSubWindow(wnd);
     wnd->show();
     wnd->activateWindow();
