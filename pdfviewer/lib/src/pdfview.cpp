@@ -1529,6 +1529,8 @@ void PdfViewPrivate::redlineUpdated(Redline redline)
                                                    100))));
                                      //QPen(QBrush(QColor(100, 0, 0, 100)), 1),
                                      //QBrush(QColor(100, 0, 0, 100))));
+    QGraphicsTextItem *lbl = m_pageScene->addText(redline.name);
+    lbl->setPos(r.center());
     m_redlineRects.at(m_redlineRects.size() - 1)->setZValue(3);
 }
 
@@ -1551,6 +1553,8 @@ void PdfViewPrivate::reloadRedlines()
                                                        100))));
                                          //QPen(QBrush(QColor(100, 0, 0, 100)), 1),
                                          //QBrush(QColor(100, 0, 0, 100))));
+        QGraphicsTextItem *lbl = m_pageScene->addText(line.name);
+        lbl->setPos(r.center());
         m_redlineRects.at(m_redlineRects.size() - 1)->setZValue(3);
     }
 }

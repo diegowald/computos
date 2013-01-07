@@ -8,6 +8,7 @@
 #include "author.h"
 #include "xmlnode.h"
 #include <boost/shared_ptr.hpp>
+#include <pdfredlining.h>
 
 namespace proyecto {
 
@@ -69,6 +70,8 @@ private:
 
     static QString objectName;
     static QString objectVersion;
+
+    QMap<QString, pdf::PDFRedLining*> pdfs;
 signals:
 
 public slots:

@@ -16,7 +16,6 @@ struct Redline
     QColor color;
 };
 
-
 class RedliningWidget
 {
 public:

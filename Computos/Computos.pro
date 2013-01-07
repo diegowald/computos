@@ -89,7 +89,9 @@ SOURCES += main.cpp\
     xmlhelper.cpp \
     xmlnode.cpp \
     xmlkeynotfoundexception.cpp \
-    wndpdfviewer.cpp
+    wndpdfviewer.cpp \
+    pdfredlining.cpp \
+    redline.cpp
 
 HEADERS  += \
     elemento.h \
@@ -158,7 +160,9 @@ HEADERS  += \
     xmlhelper.h \
     xmlnode.h \
     xmlkeynotfoundexception.h \
-    wndpdfviewer.h
+    wndpdfviewer.h \
+    pdfredlining.h \
+    redline.h
 
 FORMS    += \
     materialdockwindow.ui \
