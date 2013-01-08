@@ -9,4 +9,9 @@ RedLineElement::RedLineElement(QObject *parent) :
 {
 }
 
+Redline RedLineElement::asRedline()
+{
+    return  pdfRedline;
+}
+
 }

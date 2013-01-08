@@ -12,7 +12,9 @@ class PDFRedLining : public QObject
     Q_OBJECT
 public:
     explicit PDFRedLining(QObject *parent = 0);
-
+    QString name() const;
+    QList<Redline> getRedlines();
+private:
     QString filename;
     QMap<QString, RedLineElement*> redlines;
 signals:

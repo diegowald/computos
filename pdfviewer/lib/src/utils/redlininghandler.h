@@ -28,6 +28,10 @@ public:
     {
         return Redline();
     }
+
+    virtual void setRedlines(QList<Redline> redlines)
+    {
+    }
 };
 
 

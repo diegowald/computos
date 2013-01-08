@@ -11,7 +11,7 @@ class RedLineElement : public QObject
     Q_OBJECT
 public:
     explicit RedLineElement(QObject *parent = 0);
-    
+    Redline asRedline();
 signals:
     
 public slots:

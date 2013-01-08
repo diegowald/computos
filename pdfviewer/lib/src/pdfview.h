@@ -192,6 +192,7 @@ public:
 	void setRenderHint(Poppler::Document::RenderHint hint, bool on = true);
 	Poppler::Document::RenderHints renderHints() const;
 
+    virtual void setRedlines(QList<Redline> redlines);
 	bool load(const QString &fileName);
 	QString fileName() const;
 	Poppler::Document *document() const;
