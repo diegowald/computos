@@ -14,6 +14,7 @@ struct Redline
     QString name;
     QString author;
     QColor color;
+    bool deleted;
 };
 
 class RedliningWidget

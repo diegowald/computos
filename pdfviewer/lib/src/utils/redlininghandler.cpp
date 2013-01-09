@@ -177,25 +177,28 @@ void RedliningHandler::insertRedline(int index, Redline redline)
         }
     }
 
-    Q_ASSERT_X(redline.pageNumber < m_pageLabels.size(), "RedliningHandler", "make sure to call setPageLabels() before inserting redlines with insertRedline(), appendRedline(), toggleRedline() or loadRedlines()");
-    QAction *action = new QAction(tr("Page %1, %2").arg(m_pageLabels.at(redline.pageNumber)).arg(redline.name), m_redlinesMenu);
-    action->setData(redline.name);
-    connect(action, SIGNAL(triggered()), this, SLOT(goToActionRedline()));
-    if (index >= 0 && index < m_redlines.size())
-    {
-        m_redlines.insert(index, redline);
-        m_redlinesMenu->insertAction(m_redlinesMenu->actions().at(index+4), action);
-    }
-    else // append at the end
-    {
-        m_redlines.append(redline);
-        m_redlinesMenu->addAction(action);
-    }
-    updateActions();
-    emit redlineUpdated(redline);
-
     if (emitRedliningSignals)
         emit redlineCreated(redline);
+
+    if (!redline.deleted)
+    {
+        Q_ASSERT_X(redline.pageNumber < m_pageLabels.size(), "RedliningHandler", "make sure to call setPageLabels() before inserting redlines with insertRedline(), appendRedline(), toggleRedline() or loadRedlines()");
+        QAction *action = new QAction(tr("Page %1, %2").arg(m_pageLabels.at(redline.pageNumber)).arg(redline.name), m_redlinesMenu);
+        action->setData(redline.name);
+        connect(action, SIGNAL(triggered()), this, SLOT(goToActionRedline()));
+        if (index >= 0 && index < m_redlines.size())
+        {
+            m_redlines.insert(index, redline);
+            m_redlinesMenu->insertAction(m_redlinesMenu->actions().at(index+4), action);
+        }
+        else // append at the end
+        {
+            m_redlines.append(redline);
+            m_redlinesMenu->addAction(action);
+        }
+        updateActions();
+        emit redlineUpdated(redline);
+    }
 }
 
 void RedliningHandler::appendRedline(Redline redline)

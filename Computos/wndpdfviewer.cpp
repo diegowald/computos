@@ -30,9 +30,9 @@ wndPDFViewer::~wndPDFViewer()
 
 void wndPDFViewer::initialize(QString filename)
 {
+    ui->pdfView->load(filename);
     ui->pdfView->setDisplayRedlineDialog(false);
     ui->pdfView->setEmitRedliningSignals(true);
-    ui->pdfView->load(filename);
     if (m_pdfRedlining)
     {
         ui->pdfView->setRedlines(m_pdfRedlining->getRedlines());
@@ -57,6 +57,13 @@ void wndPDFViewer::createActions()
 
 void wndPDFViewer::redlineCreated(Redline redline)
 {
+    la idea aca es la de abrir un dialog box
+            que muestre el color, un comentario,
+            una imagen extraida al momento de seleccionar
+            en la pantalla, y un combo que muestre los elementos
+            constructivos ya creados con la opcion de crear uno nuevo
+
+    redline.deleted = true;
 }
 
 void wndPDFViewer::redlineDeleted(Redline redline)
