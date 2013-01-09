@@ -75,6 +75,7 @@ public:
 	void removeTextSelection();
     void handleRedlining(const QPoint &popupMenuPos);
     void reloadRedlines();
+    virtual void setRedlines(QList<Redline> redlines);
 #ifdef USE_SYNCTEX
 	void synctexClick(const QPointF &scenePos);
 #endif // USE_SYNCTEX
@@ -99,6 +100,7 @@ public Q_SLOTS:
      * @param redline the updated redline
      */
     void redlineUpdated(Redline redline);
+
 Q_SIGNALS:
 	void scrollPositionChanged(qreal fraction, int pageNumber);
 	void openTexDocument(const QString &fileName, int lineNumber);

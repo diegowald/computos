@@ -296,14 +296,7 @@ QAction *PdfView::action(PdfViewAction action)
     case PreviousRedline:
     case NextRedline:
         if (!d->m_redliningHandler)
-        {
-            d->m_redliningHandler = new RedliningHandler(d);
-            d->m_redliningHandler->setPageLabels(d->m_popplerPageLabels);
-            connect(d->m_redliningHandler, SIGNAL(goToPosition(double)), d, SLOT(slotSetPage(double)));
-            connect(d->m_redliningHandler, SIGNAL(redlineUpdated(Redline)), d, SLOT(redlineUpdated(Redline)));
-            if (!d->m_popplerDocument)
-                d->m_redliningHandler->action(0)->setEnabled(false);
-        }
+            createRedLiningHandler();
         if (action == Redlines)
             return d->m_redliningHandler->menuAction();
         else if (action == SetRedLine)
@@ -563,6 +556,11 @@ bool PdfView::load(const QString &fileName)
     }
 
     return true;
+}
+
+void PdfView::setRedlines(QList<Redline> redlines)
+{
+    d->setRedlines(redlines);
 }
 
 QString PdfView::fileName() const
@@ -987,6 +985,18 @@ void PdfView::setZoomFactor(qreal value)
         vbar->setValue(int(qreal(vbar->maximum()) / oldVMaximum * oldVValue)); // this must be done when oldVValue == oldVMaximum in order to stay at the bottom
     }
     reloadRedlines();
+}
+
+void PdfView::createRedLiningHandler()
+{
+    d->m_redliningHandler = new RedliningHandler(d);
+    d->m_redliningHandler->setPageLabels(d->m_popplerPageLabels);
+    connect(d->m_redliningHandler, SIGNAL(goToPosition(double)), d, SLOT(slotSetPage(double)));
+    connect(d->m_redliningHandler, SIGNAL(redlineUpdated(Redline)), d, SLOT(redlineUpdated(Redline)));
+    connect(d->m_redliningHandler, SIGNAL(redlineCreated(Redline)), this, SIGNAL(redlineCreated(Redline)));
+    connect(d->m_redliningHandler, SIGNAL(redlineDeleted(Redline)), this, SIGNAL(redlineDeleted(Redline)));
+    if (!d->m_popplerDocument)
+        d->m_redliningHandler->action(0)->setEnabled(false);
 }
 
 void PdfView::reloadRedlines()
@@ -1559,6 +1569,14 @@ void PdfViewPrivate::reloadRedlines()
     }
 }
 
+void PdfViewPrivate::setRedlines(QList<Redline> redlines)
+{
+    foreach(Redline line, redlines)
+    {
+        m_redliningHandler->appendRedline(line);
+    }
+}
+
 /*******************************************************************/
 // Events
 
@@ -1573,6 +1591,21 @@ void PdfView::removeContextMenuAction(QAction *action)
     for (int i = 0; i < d->m_contextMenuActions.size(); ++i)
         if (d->m_contextMenuActions.at(i) == action)
             d->m_contextMenuActions.takeAt(i);
+}
+
+
+void PdfView::setDisplayRedlineDialog(bool display)
+{
+    if (!d->m_redliningHandler)
+        createRedLiningHandler();
+    d->m_redliningHandler->setDisplayRedlineDialog(display);
+}
+
+void PdfView::setEmitRedliningSignals(bool emitSignals)
+{
+    if (!d->m_redliningHandler)
+        createRedLiningHandler();
+    d->m_redliningHandler->setEmitRedliningSignals(emitSignals);
 }
 
 void PdfView::contextMenuEvent(QContextMenuEvent *event)

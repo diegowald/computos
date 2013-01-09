@@ -17,7 +17,13 @@ public:
     explicit wndPDFViewer(pdf::PDFRedLining *pdfRedLining, QWidget *parent = 0);
     explicit wndPDFViewer(QString filename, QWidget *parent = 0);
     ~wndPDFViewer();
-    
+protected:
+    void initialize(QString filename);
+    void createActions();
+
+public slots:
+    void redlineCreated(Redline redline);
+    void redlineDeleted(Redline redline);
 private:
     Ui::wndPDFViewer *ui;
   //  PdfView *pdfView;

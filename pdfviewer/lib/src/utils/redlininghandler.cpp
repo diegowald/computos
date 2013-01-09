@@ -90,6 +90,8 @@ RedliningHandler::RedliningHandler(RedliningWidget *parent)
 //#endif // QT_NO_SHORTCUT
 
     m_redlinesMenu->addSeparator();
+    displayRedliningDialog = true;
+    emitRedliningSignals = false;
 }
 
 RedliningHandler::~RedliningHandler()
@@ -165,11 +167,14 @@ void RedliningHandler::insertRedline(int index, Redline redline)
 {
 //	QAction *action = new QAction(tr("Page %1").arg(QString::number(int(pos))), m_bookmarksMenu);
 
-    dlgRedline dlg;
-    if (dlg.exec() == QDialog::Accepted)
+    if (displayRedliningDialog)
     {
-        redline.name = dlg.Name();
-        redline.color = dlg.Color();
+        dlgRedline dlg;
+        if (dlg.exec() == QDialog::Accepted)
+        {
+            redline.name = dlg.Name();
+            redline.color = dlg.Color();
+        }
     }
 
     Q_ASSERT_X(redline.pageNumber < m_pageLabels.size(), "RedliningHandler", "make sure to call setPageLabels() before inserting redlines with insertRedline(), appendRedline(), toggleRedline() or loadRedlines()");
@@ -188,6 +193,9 @@ void RedliningHandler::insertRedline(int index, Redline redline)
     }
     updateActions();
     emit redlineUpdated(redline);
+
+    if (emitRedliningSignals)
+        emit redlineCreated(redline);
 }
 
 void RedliningHandler::appendRedline(Redline redline)
@@ -206,7 +214,19 @@ void RedliningHandler::removeRedline(int index)
         m_redlinesMenu->removeAction(m_redlinesMenu->actions().at(index+4)); // 4 is the number of actions defined in the constructor
         updateActions();
         Q_EMIT redlineUpdated(redline);
+        if (emitRedliningSignals)
+            emit redlineDeleted(redline);
     }
+}
+
+void RedliningHandler::setDisplayRedlineDialog(bool displayDialog)
+{
+    displayRedliningDialog = displayDialog;
+}
+
+void RedliningHandler::setEmitRedliningSignals(bool emitSignals)
+{
+    emitRedliningSignals = emitSignals;
 }
 
 /*void RedliningHandler::removeRedlineAtPosition(double pos)

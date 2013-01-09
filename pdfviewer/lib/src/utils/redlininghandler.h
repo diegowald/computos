@@ -29,7 +29,7 @@ public:
         return Redline();
     }
 
-    virtual void setRedlines(QList<Redline> redlines)
+    virtual void setRedlines(QList<Redline>)
     {
     }
 };
@@ -62,6 +62,10 @@ public:
      * \return the <em>which</em>-th action in the bookmarks menu
      */
     QAction *action(int which);
+
+    void setDisplayRedlineDialog(bool displayDialog);
+    void setEmitRedliningSignals(bool emitSignals);
+
 
     /**
      * Set the bookmarks for the current file to the specified list
@@ -150,6 +154,8 @@ public:
      */
     void saveRedlines();
 
+    void appendRedline(Redline redline);
+
 Q_SIGNALS:
     /**
      * This signal is emitted when a bookmark is added or removed at position
@@ -167,6 +173,9 @@ Q_SIGNALS:
      */
     void redlineUpdated(Redline pos);
 
+    void redlineCreated(Redline redline);
+    void redlineDeleted(Redline redline);
+
     /**
      * When this signal is emitted, the BookmarksWidget object should be
      * requested to scroll its contents to position pos.
@@ -177,6 +186,8 @@ Q_SIGNALS:
      * scrolled to the position <em>pos</em>.
      */
     void goToPosition(double pos);
+
+
 
 private Q_SLOTS:
     /*void toggleBookmark();
@@ -195,7 +206,7 @@ private:
     void removeBookmark(int index);*/
 
     void insertRedline(int index, Redline redline);
-    void appendRedline(Redline redline);
+
     void removeRedline(int index);
 
     /*BookmarksWidget *m_bookmarksWidget;
@@ -211,6 +222,10 @@ private:
     QList<Redline> m_redlines;
     QString m_filename;
     QStringList m_pageLabels;
+
+    bool displayRedliningDialog;
+    bool emitRedliningSignals;
+
 
 };
 

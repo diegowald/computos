@@ -21,6 +21,7 @@
 #include <QtGui/QGraphicsView>
 //#include <poppler-qt4.h>
 #include <poppler/qt4/poppler-qt4.h>
+#include "utils/redlininghandler.h"
 
 class PdfViewPrivate;
 
@@ -254,6 +255,9 @@ public:
 	 */
 	void removeContextMenuAction(QAction *action);
 
+    void setDisplayRedlineDialog(bool display);
+    void setEmitRedliningSignals(bool emitSignals);
+
 public Q_SLOTS:
 	/**
 	 * Toggle the visibility of the forms.
@@ -329,6 +333,20 @@ Q_SIGNALS:
 	 */
 	void mouseToolChanged(PdfView::MouseTool tool);
 
+    /**
+     * @brief redlineCreated. This signal is emitted when a new Redline is created.
+     * @param redline is the redline information retrieved, can be modified.
+     */
+    void redlineCreated(Redline redline);
+
+    /**
+     * @brief redlineDeleted. This signal is emitted when a redline is deleted
+     * @param redline
+     */
+    void redlineDeleted(Redline redline);
+
+
+
 protected:
 #ifndef QT_NO_CONTEXTMENU
 	virtual void contextMenuEvent(QContextMenuEvent *event);
@@ -340,6 +358,7 @@ protected:
 
     void reloadRedlines();
 
+    void createRedLiningHandler();
 #ifndef QT_NO_WHEELEVENT
 	virtual void wheelEvent(QWheelEvent *event);
 #endif // QT_NO_WHEELEVENT
