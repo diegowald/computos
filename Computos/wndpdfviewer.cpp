@@ -38,7 +38,7 @@ void wndPDFViewer::initialize(QString filename)
     {
         ui->pdfView->setRedlines(m_pdfRedlining->getRedlines());
     }
-    connect(ui->pdfView, SIGNAL(redlineCreated(Redline)), this, SLOT(redlineCreated(Redline)));
+    connect(ui->pdfView, SIGNAL(redlineCreated(Redline&)), this, SLOT(redlineCreated(Redline&)));
     connect(ui->pdfView, SIGNAL(redlineDeleted(Redline)), this, SLOT(redlineDeleted(Redline)));
 }
 
@@ -56,16 +56,17 @@ void wndPDFViewer::createActions()
     ui->toolBar->addAction(ui->pdfView->action(PdfView::ZoomOut));
 }
 
-void wndPDFViewer::redlineCreated(Redline redline)
+void wndPDFViewer::redlineCreated(Redline &redline)
 {
     dlgLinkRedlineWithConstructiveElement dlg(this);
+    dlg.setImage(redline.image);
     if (dlg.exec() == QDialog::Accepted)
     {
-        /*la idea aca es la de abrir un dialog box
-            que muestre el color, un comentario,
-            una imagen extraida al momento de seleccionar
-            en la pantalla, y un combo que muestre los elementos
-            constructivos ya creados con la opcion de crear uno nuevo*/
+        redline.author = dlg.Author();
+        redline.color = dlg.Color();
+        redline.deleted = false;
+        redline.name = dlg.Annotation();
+        redline.elementReference = dlg.Element();
     }
     else
     {

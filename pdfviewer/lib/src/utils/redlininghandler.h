@@ -13,8 +13,10 @@ struct Redline
     QRectF rect;
     QString name;
     QString author;
+    QString elementReference;
     QColor color;
     bool deleted;
+    QImage image;
 };
 
 class RedliningWidget
@@ -174,7 +176,7 @@ Q_SIGNALS:
      */
     void redlineUpdated(Redline pos);
 
-    void redlineCreated(Redline redline);
+    void redlineCreated(Redline &redline);
     void redlineDeleted(Redline redline);
 
     /**

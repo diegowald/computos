@@ -14,7 +14,18 @@ class dlgLinkRedlineWithConstructiveElement : public QDialog
 public:
     explicit dlgLinkRedlineWithConstructiveElement(QWidget *parent = 0);
     ~dlgLinkRedlineWithConstructiveElement();
-    
+
+    void setImage(QImage image);
+    QString Author();
+    QColor Color();
+    QString Annotation();
+    QString Element();
+
+private slots:
+    void on_btnNewMaterial_pressed();
+
+    void on_btnPickColor_pressed();
+
 private:
     Ui::dlgLinkRedlineWithConstructiveElement *ui;
 };

@@ -22,7 +22,7 @@ protected:
     void createActions();
 
 public slots:
-    void redlineCreated(Redline redline);
+    void redlineCreated(Redline &redline);
     void redlineDeleted(Redline redline);
 private:
     Ui::wndPDFViewer *ui;

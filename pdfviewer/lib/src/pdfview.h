@@ -337,13 +337,13 @@ Q_SIGNALS:
      * @brief redlineCreated. This signal is emitted when a new Redline is created.
      * @param redline is the redline information retrieved, can be modified.
      */
-    void redlineCreated(Redline redline);
+    void redlineCreated(Redline &redline);
 
     /**
      * @brief redlineDeleted. This signal is emitted when a redline is deleted
      * @param redline
      */
-    void redlineDeleted(Redline redline);
+    void redlineDeleted(Redline &redline);
 
 
 

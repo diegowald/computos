@@ -993,7 +993,7 @@ void PdfView::createRedLiningHandler()
     d->m_redliningHandler->setPageLabels(d->m_popplerPageLabels);
     connect(d->m_redliningHandler, SIGNAL(goToPosition(double)), d, SLOT(slotSetPage(double)));
     connect(d->m_redliningHandler, SIGNAL(redlineUpdated(Redline)), d, SLOT(redlineUpdated(Redline)));
-    connect(d->m_redliningHandler, SIGNAL(redlineCreated(Redline)), this, SIGNAL(redlineCreated(Redline)));
+    connect(d->m_redliningHandler, SIGNAL(redlineCreated(Redline&)), this, SIGNAL(redlineCreated(Redline&)));
     connect(d->m_redliningHandler, SIGNAL(redlineDeleted(Redline)), this, SIGNAL(redlineDeleted(Redline)));
     if (!d->m_popplerDocument)
         d->m_redliningHandler->action(0)->setEnabled(false);
@@ -1357,6 +1357,13 @@ m_Redline.rect =redlineRect;
     m_Redline.pageNumber = pageNumber;
 
     m_Redline.name = "Hello World";
+    const double resX = m_dpiX * m_zoomFactor;
+    const double resY = m_dpiY * m_zoomFactor;
+    m_Redline.image = m_pageItems.at(pageNumber)->renderToImage(resX, resY,
+                                                                redlineRect.left() * scaleFactorX(),
+                                                                redlineRect.top() * scaleFactorY(),
+                                                                redlineRect.width() * scaleFactorX(),
+                                                                redlineRect.height() * scaleFactorY());
 
     // show popup menu with copy and save options
     QMenu menu(q);
@@ -1381,7 +1388,11 @@ m_Redline.rect =redlineRect;
         {
             const double resX = m_dpiX * m_zoomFactor;
             const double resY = m_dpiY * m_zoomFactor;
-            const QImage image = m_pageItems.at(pageNumber)->renderToImage(resX, resY, selectionRect.left() * scaleFactorX(), selectionRect.top() * scaleFactorY(), selectionRect.width() * scaleFactorX(), selectionRect.height() * scaleFactorY());
+            const QImage image = m_pageItems.at(pageNumber)->renderToImage(resX, resY,
+selectionRect.left() * scaleFactorX(),
+selectionRect.top() * scaleFactorY(),
+selectionRect.width() * scaleFactorX(),
+selectionRect.height() * scaleFactorY());
             if (choice == copyImageAction)
             {
                 QClipboard *clipboard = QApplication::clipboard();
