@@ -91,7 +91,8 @@ SOURCES += main.cpp\
     xmlkeynotfoundexception.cpp \
     wndpdfviewer.cpp \
     pdfredlining.cpp \
-    redline.cpp
+    redline.cpp \
+    dlglinkredlinewithconstructiveelement.cpp
 
 HEADERS  += \
     elemento.h \
@@ -162,7 +163,8 @@ HEADERS  += \
     xmlkeynotfoundexception.h \
     wndpdfviewer.h \
     pdfredlining.h \
-    redline.h
+    redline.h \
+    dlglinkredlinewithconstructiveelement.h
 
 FORMS    += \
     materialdockwindow.ui \
@@ -190,7 +192,8 @@ FORMS    += \
     dlgnewelement.ui \
     wndbrowser.ui \
     dlgrawvalue.ui \
-    wndpdfviewer.ui
+    wndpdfviewer.ui \
+    dlglinkredlinewithconstructiveelement.ui
 
 RESOURCES += \
     recursos.qrc

@@ -1,5 +1,6 @@
 #include "wndpdfviewer.h"
 #include "ui_wndpdfviewer.h"
+#include "dlglinkredlinewithconstructiveelement.h"
 
 wndPDFViewer::wndPDFViewer(pdf::PDFRedLining *pdfRedLining, QWidget *parent) :
     QMainWindow(parent),
@@ -57,13 +58,20 @@ void wndPDFViewer::createActions()
 
 void wndPDFViewer::redlineCreated(Redline redline)
 {
-    la idea aca es la de abrir un dialog box
+    dlgLinkRedlineWithConstructiveElement dlg(this);
+    if (dlg.exec() == QDialog::Accepted)
+    {
+        /*la idea aca es la de abrir un dialog box
             que muestre el color, un comentario,
             una imagen extraida al momento de seleccionar
             en la pantalla, y un combo que muestre los elementos
-            constructivos ya creados con la opcion de crear uno nuevo
-
-    redline.deleted = true;
+            constructivos ya creados con la opcion de crear uno nuevo*/
+    }
+    else
+    {
+        // Redline will be cancelled.
+        redline.deleted = true;
+    }
 }
 
 void wndPDFViewer::redlineDeleted(Redline redline)
