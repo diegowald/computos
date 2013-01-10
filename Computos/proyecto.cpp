@@ -132,6 +132,17 @@ boost::shared_ptr<QStringList> Proyecto::getAllElementoConstructivoNames()
     return res;
 }
 
+void Proyecto::addPDFToProject(QString pdfFileName)
+{
+    Aca tengo que seguir trabajando!
+}
+
+boost::shared_ptr<QStringList> Proyecto::getAllPDFNames()
+{
+    boost::shared_ptr<QStringList> res(new QStringList(pdfs.keys()));
+    return res;
+}
+
 bool Proyecto::load(QString &filename)
 {
     if (filename.endsWith(".xml", Qt::CaseInsensitive))

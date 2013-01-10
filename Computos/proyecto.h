@@ -47,6 +47,10 @@ public:
     bool saveAs(QString &filename);
 
     boost::shared_ptr<QStringList> getValidExtensions();
+
+    void addPDFToProject(QString pdfFileName);
+    boost::shared_ptr<QStringList> getAllPDFNames();
+
 private:
 
     bool saveAsStream(QString &filename);

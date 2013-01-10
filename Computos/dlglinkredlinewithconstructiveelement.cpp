@@ -1,12 +1,14 @@
 #include "dlglinkredlinewithconstructiveelement.h"
 #include "ui_dlglinkredlinewithconstructiveelement.h"
 #include <QColorDialog>
+#include "datastore.h"
 
-dlgLinkRedlineWithConstructiveElement::dlgLinkRedlineWithConstructiveElement(QWidget *parent) :
+dlgLinkRedlineWithConstructiveElement::dlgLinkRedlineWithConstructiveElement(QString projectName, QWidget *parent) :
     QDialog(parent),
     ui(new Ui::dlgLinkRedlineWithConstructiveElement)
 {
     ui->setupUi(this);
+    LoadElements(projectName);
 }
 
 dlgLinkRedlineWithConstructiveElement::~dlgLinkRedlineWithConstructiveElement()
@@ -45,6 +47,7 @@ QString dlgLinkRedlineWithConstructiveElement::Element()
 
 void dlgLinkRedlineWithConstructiveElement::on_btnNewMaterial_pressed()
 {
+    //TODO: finalizar esta funcionalidad
 }
 
 void dlgLinkRedlineWithConstructiveElement::on_btnPickColor_pressed()
@@ -57,4 +60,11 @@ void dlgLinkRedlineWithConstructiveElement::on_btnPickColor_pressed()
         palette.setColor(ui->color->backgroundRole(), dlg.currentColor());
         ui->color->setPalette(palette);
     }
+}
+
+void dlgLinkRedlineWithConstructiveElement::LoadElements(QString projectName)
+{
+    ui->cboMaterial->clear();
+    boost::shared_ptr<QStringList> projects = DataStore::getInstance()->getProject(projectName)->getAllElementoConstructivoNames();
+    ui->cboMaterial->addItems(*projects);
 }

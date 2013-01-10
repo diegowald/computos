@@ -2,10 +2,11 @@
 #include "ui_wndpdfviewer.h"
 #include "dlglinkredlinewithconstructiveelement.h"
 
-wndPDFViewer::wndPDFViewer(pdf::PDFRedLining *pdfRedLining, QWidget *parent) :
+wndPDFViewer::wndPDFViewer(QString project, pdf::PDFRedLining *pdfRedLining, QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::wndPDFViewer)
 {
+    projectName = project;
     ui->setupUi(this);
     //QString filename = "/home/diego/Documents/C++-GUI-Programming-with-Qt-4-1st-ed.pdf";
     m_pdfRedlining = pdfRedLining;
@@ -13,10 +14,11 @@ wndPDFViewer::wndPDFViewer(pdf::PDFRedLining *pdfRedLining, QWidget *parent) :
     initialize(pdfRedLining->name());
 }
 
-wndPDFViewer::wndPDFViewer(QString filename, QWidget *parent) :
+wndPDFViewer::wndPDFViewer(QString project, QString filename, QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::wndPDFViewer)
 {
+    projectName = project;
     ui->setupUi(this);
     //QString filename = "/home/diego/Documents/C++-GUI-Programming-with-Qt-4-1st-ed.pdf";
     m_pdfRedlining = NULL;
@@ -58,7 +60,7 @@ void wndPDFViewer::createActions()
 
 void wndPDFViewer::redlineCreated(Redline &redline)
 {
-    dlgLinkRedlineWithConstructiveElement dlg(this);
+    dlgLinkRedlineWithConstructiveElement dlg(projectName, this);
     dlg.setImage(redline.image);
     if (dlg.exec() == QDialog::Accepted)
     {

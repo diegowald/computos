@@ -12,7 +12,7 @@ class dlgLinkRedlineWithConstructiveElement : public QDialog
     Q_OBJECT
     
 public:
-    explicit dlgLinkRedlineWithConstructiveElement(QWidget *parent = 0);
+    explicit dlgLinkRedlineWithConstructiveElement(QString projectName, QWidget *parent = 0);
     ~dlgLinkRedlineWithConstructiveElement();
 
     void setImage(QImage image);
@@ -25,6 +25,9 @@ private slots:
     void on_btnNewMaterial_pressed();
 
     void on_btnPickColor_pressed();
+
+protected:
+    void LoadElements(QString projectName);
 
 private:
     Ui::dlgLinkRedlineWithConstructiveElement *ui;
