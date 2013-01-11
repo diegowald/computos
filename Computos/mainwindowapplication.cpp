@@ -77,13 +77,6 @@ MainWindowApplication::MainWindowApplication(QWidget *parent) :
     connect(ui->actionEdit_Material_defiinition, SIGNAL(triggered()), this, SLOT(editMaterialLibrary()));
 
     connect(ui->actionE_xit, SIGNAL(triggered()), this, SLOT(exitApp()));
-
-    // testing
-    wndPDFViewer *wnd = new wndPDFViewer("", "/home/diego/Documents/C++-GUI-Programming-with-Qt-4-1st-ed.pdf", this);
-    ui->mdiArea->addSubWindow(wnd);
-    wnd->show();
-    wnd->activateWindow();
-    // /testing
 }
 
 
@@ -271,4 +264,28 @@ void MainWindowApplication::on_openBrowser(QString &search)
     ui->mdiArea->addSubWindow(wnd);
     wnd->show();
     wnd->activateWindow();
+}
+
+void MainWindowApplication::on_action_Add_PDF_Document_triggered()
+{
+    ProjectWindow *w = qobject_cast<ProjectWindow *>(ui->mdiArea->activeSubWindow()->widget());
+    if (w != NULL)
+    {
+        QString filename = QFileDialog::getOpenFileName(this,
+                                                        tr("Include PDF Document"), ".",
+                                                        tr("Adobe Acrobat pdf files (*.pdf)"));
+
+        if (!filename.isEmpty())
+        {
+            QString projectName = w->getProjectName();
+            proyecto::Proyecto *p = DataStore::getInstance()->getProject(projectName);
+            p->addPDFToProject(filename);
+
+
+            wndPDFViewer *newPDF = new wndPDFViewer(projectName, filename, this);
+            ui->mdiArea->addSubWindow(newPDF);
+            newPDF->show();
+            newPDF->activateWindow();
+        }
+    }
 }

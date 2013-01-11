@@ -14,8 +14,7 @@ class wndPDFViewer : public QMainWindow
     Q_OBJECT
     
 public:
-    explicit wndPDFViewer(QString project, pdf::PDFRedLining *pdfRedLining, QWidget *parent = 0);
-    explicit wndPDFViewer(QString project, QString filename, QWidget *parent = 0);
+    explicit wndPDFViewer(QString project, QString pdfName, QWidget *parent = 0);
     ~wndPDFViewer();
 protected:
     void initialize(QString filename);

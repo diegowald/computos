@@ -24,7 +24,7 @@ QString Proyecto::EMAIL_TAG = "email";
 QString Proyecto::NOTES_TAG = "notes";
 QString Proyecto::ELEMENTS_TAG = "elements";
 QString Proyecto::COUNT_TAG = "count";
-
+QString Proyecto::PDFS_TAG = "pdfs";
 
 Proyecto::Proyecto(QString filename, QObject *parent) :
     QObject(parent), nombre(""), propietarios(""),
@@ -134,13 +134,22 @@ boost::shared_ptr<QStringList> Proyecto::getAllElementoConstructivoNames()
 
 void Proyecto::addPDFToProject(QString pdfFileName)
 {
-    Aca tengo que seguir trabajando!
+    pdf::PDFRedLining *pdfDoc = new pdf::PDFRedLining(pdfFileName, this);
+    pdfs[pdfFileName] = pdfDoc;
 }
 
 boost::shared_ptr<QStringList> Proyecto::getAllPDFNames()
 {
     boost::shared_ptr<QStringList> res(new QStringList(pdfs.keys()));
     return res;
+}
+
+pdf::PDFRedLining *Proyecto::getRedLining(QString pdfName)
+{
+    if (pdfs.find(pdfName) != pdfs.end())
+        return pdfs[pdfName];
+    else
+        return NULL;
 }
 
 bool Proyecto::load(QString &filename)
@@ -300,6 +309,14 @@ xml::XMLNode_ptr Proyecto::createProjectXMLTree()
     {
         elementos->addChild(elementosConstructivos[elemento]->toXMLTree());
     }
+
+    xml::XMLNode_ptr _pdfs(new xml::XMLNode(PDFS_TAG));
+    node->addChild(_pdfs);
+    foreach(QString pdf, pdfs.keys())
+    {
+        _pdfs->addChild(pdfs[pdf]->toXMLTree());
+    }
+
     return node;
 }
 

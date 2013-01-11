@@ -50,6 +50,7 @@ public:
 
     void addPDFToProject(QString pdfFileName);
     boost::shared_ptr<QStringList> getAllPDFNames();
+    pdf::PDFRedLining *getRedLining(QString pdfName);
 
 private:
 
@@ -90,6 +91,7 @@ public:
     static QString NOTES_TAG;
     static QString ELEMENTS_TAG;
     static QString COUNT_TAG;
+    static QString PDFS_TAG;
 };
 }
 #endif // PROYECTO_H

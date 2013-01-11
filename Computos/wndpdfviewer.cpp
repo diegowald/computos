@@ -1,29 +1,18 @@
 #include "wndpdfviewer.h"
 #include "ui_wndpdfviewer.h"
 #include "dlglinkredlinewithconstructiveelement.h"
+#include "datastore.h"
 
-wndPDFViewer::wndPDFViewer(QString project, pdf::PDFRedLining *pdfRedLining, QWidget *parent) :
+wndPDFViewer::wndPDFViewer(QString project, QString pdfName, QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::wndPDFViewer)
 {
     projectName = project;
     ui->setupUi(this);
     //QString filename = "/home/diego/Documents/C++-GUI-Programming-with-Qt-4-1st-ed.pdf";
-    m_pdfRedlining = pdfRedLining;
+    m_pdfRedlining = DataStore::getInstance()->getProject(project)->getRedLining(pdfName);
     createActions();
-    initialize(pdfRedLining->name());
-}
-
-wndPDFViewer::wndPDFViewer(QString project, QString filename, QWidget *parent) :
-    QMainWindow(parent),
-    ui(new Ui::wndPDFViewer)
-{
-    projectName = project;
-    ui->setupUi(this);
-    //QString filename = "/home/diego/Documents/C++-GUI-Programming-with-Qt-4-1st-ed.pdf";
-    m_pdfRedlining = NULL;
-    createActions();
-    initialize(filename);
+    initialize(m_pdfRedlining->name());
 }
 
 wndPDFViewer::~wndPDFViewer()
