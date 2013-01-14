@@ -39,8 +39,9 @@ protected:
     void reLoadResumenMateriales();
     void dragEnterEvent(QDragEnterEvent *event);
     void dropEvent(QDropEvent *event);
+    bool createNewElement(QString material);
 public slots:
-
+    void createNewElement();
 private slots:
 
     void on_treeProyecto_doubleClicked(const QModelIndex &index);

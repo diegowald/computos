@@ -13,7 +13,7 @@ struct Redline
     QRectF rect;
     QString name;
     QString author;
-    QString elementReference;
+    QStringList elementReference;
     QColor color;
     bool deleted;
     QImage image;

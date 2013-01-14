@@ -44,6 +44,7 @@ private slots:
     void on_action_Import_Pricelist_triggered();
     void on_openBrowser(QString &search);
     void on_action_Add_PDF_Document_triggered();
+    void on_actionOpen_PDF_triggered();
 };
 
 #endif // MAINWINDOWAPPLICATOIN_H

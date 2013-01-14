@@ -92,7 +92,8 @@ SOURCES += main.cpp\
     wndpdfviewer.cpp \
     pdfredlining.cpp \
     redline.cpp \
-    dlglinkredlinewithconstructiveelement.cpp
+    dlglinkredlinewithconstructiveelement.cpp \
+    dlglistselector.cpp
 
 HEADERS  += \
     elemento.h \
@@ -164,7 +165,8 @@ HEADERS  += \
     wndpdfviewer.h \
     pdfredlining.h \
     redline.h \
-    dlglinkredlinewithconstructiveelement.h
+    dlglinkredlinewithconstructiveelement.h \
+    dlglistselector.h
 
 FORMS    += \
     materialdockwindow.ui \
@@ -193,7 +195,8 @@ FORMS    += \
     wndbrowser.ui \
     dlgrawvalue.ui \
     wndpdfviewer.ui \
-    dlglinkredlinewithconstructiveelement.ui
+    dlglinkredlinewithconstructiveelement.ui \
+    dlglistselector.ui
 
 RESOURCES += \
     recursos.qrc

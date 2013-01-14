@@ -12,6 +12,7 @@ class RedLineElement : public QObject
     Q_OBJECT
 public:
     explicit RedLineElement(QObject *parent = 0);
+    explicit RedLineElement(Redline redline, QObject *parent = 0);
     Redline asRedline();
 
     QString name();
@@ -34,6 +35,8 @@ public:
     static QString RIGHT_TAG;
     static QString BOTTOM_TAG;
     static QString AUTHOR_TAG;
+    static QString REFS_TAGS;
+    static QString REF_COUNT;
     static QString REF_TAG;
     static QString ALPHA_TAG;
     static QString RED_TAG;

@@ -220,19 +220,24 @@ void ProjectWindow::dropEvent(QDropEvent *event)
         stream >> row >> col >> roleDataMap;
         nombreMaterial = roleDataMap[0].toString();
     }
+    if (createNewElement(nombreMaterial))
+        event->accept();
+}
 
+bool ProjectWindow::createNewElement(QString material)
+{
     bool aceptar = false;
-    if (nombreMaterial != "")
+    /*if (material != "")*/
     {
         dlgNuevoElementoConstructivo dlg(this);
-        dlg.setMaterial(nombreMaterial);
+        dlg.setMaterial(material);
         if (dlg.exec() == QDialog::Accepted)
         {
             QString nombreElementoConstructivo = dlg.nombreElementoConstructivo();
             cantidades::Cantidad *cant = dlg.cantidad();
             proyecto::ElementoConstructivo *e = new proyecto::ElementoConstructivo(this);
             e->setName(nombreElementoConstructivo);
-            e->setElemento(DataStore::getInstance()->getMaterialLibrary()->getElemento(nombreMaterial));
+            e->setElemento(DataStore::getInstance()->getMaterialLibrary()->getElemento(material));
             e->setCantidad(cant);
             DataStore::getInstance()->getProject(projectName)->addElementoConstructivo(e);
             aceptar = true;
@@ -241,10 +246,15 @@ void ProjectWindow::dropEvent(QDropEvent *event)
 
     if (aceptar)
     {
-        event->accept();
         reLoadProyecto();
         reLoadComputo();
     }
+    return aceptar;
+}
+
+void ProjectWindow::createNewElement()
+{
+    createNewElement("");
 }
 
 QString ProjectWindow::getProjectName()

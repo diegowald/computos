@@ -26,11 +26,15 @@ private slots:
 
     void on_btnPickColor_pressed();
 
+signals:
+    void createNewElement();
+
 protected:
     void LoadElements(QString projectName);
 
 private:
     Ui::dlgLinkRedlineWithConstructiveElement *ui;
+    QString project;
 };
 
 #endif // DLGLINKREDLINEWITHCONSTRUCTIVEELEMENT_H

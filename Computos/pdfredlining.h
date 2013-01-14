@@ -12,9 +12,11 @@ class PDFRedLining : public QObject
 {
     Q_OBJECT
 public:
+    explicit PDFRedLining(QObject *parent = 0);
     explicit PDFRedLining(QString FileName, QObject *parent = 0);
     QString name() const;
     QList<Redline> getRedlines();
+    void addRedline(Redline reedline);
     bool loadFromXMLTree(xml::XMLNode_ptr tree);
     xml::XMLNode_ptr toXMLTree();
 private:

@@ -8,6 +8,12 @@ QString PDFRedLining::NAME_TAG = "name";
 QString PDFRedLining::REDLINES_TAG = "annotations";
 QString PDFRedLining::COUNT_TAG = "count";
 
+PDFRedLining::PDFRedLining(QObject *parent) :
+    QObject(parent)
+{
+    filename = "";
+}
+
 PDFRedLining::PDFRedLining(QString FileName, QObject *parent) :
     QObject(parent), filename(FileName)
 {
@@ -26,6 +32,12 @@ QList<Redline> PDFRedLining::getRedlines()
         res.push_back(e->asRedline());
     }
     return res;
+}
+
+void PDFRedLining::addRedline(Redline redline)
+{
+    RedLineElement *element = new RedLineElement(redline, this);
+    redlines[element->name()] = element;
 }
 
 bool PDFRedLining::loadFromXMLTree(xml::XMLNode_ptr tree)

@@ -50,14 +50,24 @@ void wndPDFViewer::createActions()
 void wndPDFViewer::redlineCreated(Redline &redline)
 {
     dlgLinkRedlineWithConstructiveElement dlg(projectName, this);
+    QObject::connect(&dlg, SIGNAL(createNewElement(void)), this, SIGNAL(createNewElement(void)));
     dlg.setImage(redline.image);
     if (dlg.exec() == QDialog::Accepted)
     {
-        redline.author = dlg.Author();
-        redline.color = dlg.Color();
-        redline.deleted = false;
-        redline.name = dlg.Annotation();
-        redline.elementReference = dlg.Element();
+        if (dlg.Element() != "")
+        {
+            redline.author = dlg.Author();
+            redline.color = dlg.Color();
+            redline.deleted = false;
+            redline.name = dlg.Annotation();
+            redline.elementReference.push_back(dlg.Element());
+            m_pdfRedlining->addRedline(redline);
+        }
+        else
+        {
+            // redline will be cancelled since it requires a constructive element.
+            redline.deleted = true;
+        }
     }
     else
     {

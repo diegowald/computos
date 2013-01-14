@@ -23,6 +23,8 @@ protected:
 public slots:
     void redlineCreated(Redline &redline);
     void redlineDeleted(Redline redline);
+signals:
+    void createNewElement();
 private:
     Ui::wndPDFViewer *ui;
   //  PdfView *pdfView;

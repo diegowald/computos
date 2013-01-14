@@ -14,6 +14,7 @@
 #include "dlgsetproject.h"
 #include "printablewindow.h"
 #include "dlgimportpricelist.h"
+#include "dlglistselector.h"
 
 // Printing
 #include <QPrintDialog>
@@ -268,6 +269,8 @@ void MainWindowApplication::on_openBrowser(QString &search)
 
 void MainWindowApplication::on_action_Add_PDF_Document_triggered()
 {
+    if (ui->mdiArea->activeSubWindow() == NULL)
+        return;
     ProjectWindow *w = qobject_cast<ProjectWindow *>(ui->mdiArea->activeSubWindow()->widget());
     if (w != NULL)
     {
@@ -283,9 +286,31 @@ void MainWindowApplication::on_action_Add_PDF_Document_triggered()
 
 
             wndPDFViewer *newPDF = new wndPDFViewer(projectName, filename, this);
+            connect(newPDF, SIGNAL(createNewElement()), w, SLOT(createNewElement()));
             ui->mdiArea->addSubWindow(newPDF);
             newPDF->show();
             newPDF->activateWindow();
+        }
+    }
+}
+
+void MainWindowApplication::on_actionOpen_PDF_triggered()
+{
+    if (ui->mdiArea->activeSubWindow() == NULL)
+        return;
+    ProjectWindow *w = qobject_cast<ProjectWindow *>(ui->mdiArea->activeSubWindow()->widget());
+    if (w != NULL)
+    {
+        dlgListSelector dlg(this);
+        QString projectName = w->getProjectName();
+        dlg.addElements(*DataStore::getInstance()->getProject(projectName)->getAllPDFNames());
+        if (dlg.exec() == QDialog::Accepted)
+        {
+            wndPDFViewer *pdf = new wndPDFViewer(projectName, dlg.selectedElement(), this);
+            connect(pdf, SIGNAL(createNewElement()), w, SLOT(createNewElement()));
+            ui->mdiArea->addSubWindow(pdf);
+            pdf->show();
+            pdf->activateWindow();
         }
     }
 }

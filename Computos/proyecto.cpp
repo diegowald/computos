@@ -232,6 +232,18 @@ bool Proyecto::loadProjectFromXMLTree(xml::XMLNode_ptr tree)
         el->loadFromXMLTree(elements->getChildNode(i, true));
         elementosConstructivos[el->getName()] = el;
     }
+
+
+    xml::XMLNode_ptr _pdfs = tree->getChildNode(PDFS_TAG, true);
+    int numPdfs = _pdfs->getChildValue(COUNT_TAG, true).toInt();
+    for (int i = 1; i <= numPdfs; i++)
+    {
+        pdf::PDFRedLining *pdf = new pdf::PDFRedLining(this);
+        pdf->loadFromXMLTree(_pdfs->getChildNode(i, true));
+        pdfs[pdf->name()] = pdf;
+    }
+
+
     return true;
 }
 
@@ -312,6 +324,7 @@ xml::XMLNode_ptr Proyecto::createProjectXMLTree()
 
     xml::XMLNode_ptr _pdfs(new xml::XMLNode(PDFS_TAG));
     node->addChild(_pdfs);
+    node->addAttribute(COUNT_TAG, QString::number(pdfs.count()));
     foreach(QString pdf, pdfs.keys())
     {
         _pdfs->addChild(pdfs[pdf]->toXMLTree());

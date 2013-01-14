@@ -9,6 +9,7 @@ dlgLinkRedlineWithConstructiveElement::dlgLinkRedlineWithConstructiveElement(QSt
 {
     ui->setupUi(this);
     LoadElements(projectName);
+    project = projectName;
 }
 
 dlgLinkRedlineWithConstructiveElement::~dlgLinkRedlineWithConstructiveElement()
@@ -47,7 +48,8 @@ QString dlgLinkRedlineWithConstructiveElement::Element()
 
 void dlgLinkRedlineWithConstructiveElement::on_btnNewMaterial_pressed()
 {
-    //TODO: finalizar esta funcionalidad
+    emit createNewElement();
+    LoadElements(project);
 }
 
 void dlgLinkRedlineWithConstructiveElement::on_btnPickColor_pressed()
