@@ -23,6 +23,7 @@ protected:
 public slots:
     void redlineCreated(Redline &redline);
     void redlineDeleted(Redline redline);
+    void tooltipForElement(QString el, QString &tooltip);
 signals:
     void createNewElement();
 private:

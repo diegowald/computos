@@ -237,7 +237,7 @@ bool ProjectWindow::createNewElement(QString material)
             cantidades::Cantidad *cant = dlg.cantidad();
             proyecto::ElementoConstructivo *e = new proyecto::ElementoConstructivo(this);
             e->setName(nombreElementoConstructivo);
-            e->setElemento(DataStore::getInstance()->getMaterialLibrary()->getElemento(material));
+            e->setElemento(DataStore::getInstance()->getMaterialLibrary()->getElemento(dlg.nombreMaterial()));
             e->setCantidad(cant);
             DataStore::getInstance()->getProject(projectName)->addElementoConstructivo(e);
             aceptar = true;

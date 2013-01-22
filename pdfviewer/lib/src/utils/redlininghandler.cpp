@@ -142,7 +142,7 @@ void RedliningHandler::setPageLabels(const QStringList &labels)
 
 void RedliningHandler::updateActions()
 {
-    const Redline redline = m_redlinesWidget->redline();
+    Redline redline = m_redlinesWidget->redline();
     int which = -1;
     QList<QAction*> redlineActions = m_redlinesMenu->actions();
     for (int i = 0; i < m_redlines.size(); ++i)
@@ -201,11 +201,37 @@ void RedliningHandler::insertRedline(int index, Redline redline)
     }
 }
 
-void RedliningHandler::appendRedline(Redline redline)
+void RedliningHandler::appendRedline(Redline &redline)
 {
     if (redline.pageNumber < 0)
         return;
     insertRedline(-1, redline); // using -1 as index ensures that pos will be appended at the end of the bookmarks list
+}
+
+bool RedliningHandler::isRedLineHovered(QPointF pos)
+{
+    foreach(Redline r, m_redlines)
+    {
+        if (r.rect.contains(pos))
+            return true;
+    }
+    return false;
+}
+
+QString RedliningHandler::getTooltipText(QPointF pos)
+{
+    QString tooltipToShow = "";
+    foreach(Redline r, m_redlines)
+    {
+        foreach (QString el, r.elementReference)
+        {
+            QString tooltip = "";
+            emit tooltipForElement(el, tooltip);
+            if (tooltip.size() > 0)
+                tooltipToShow += tooltip + "\n";
+        }
+    }
+    return tooltipToShow;
 }
 
 void RedliningHandler::removeRedline(int index)
@@ -236,14 +262,14 @@ void RedliningHandler::setEmitRedliningSignals(bool emitSignals)
 {
     removeRedline(m_redlines.indexOf(pos));
 }*/
-void RedliningHandler::removeRedline(Redline redline)
+void RedliningHandler::removeRedline(Redline &redline)
 {
     //removeRedline(m_redlines.indexOf(redline));
 }
 
 void RedliningHandler::toggleRedline()
 {
-    const Redline redline = m_redlinesWidget->redline();
+    Redline redline = m_redlinesWidget->redline();
     for (int i = 0; i < m_redlines.size(); ++i)
     {
         if (m_redlines.at(i).name == redline.name)

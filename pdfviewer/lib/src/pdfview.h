@@ -343,7 +343,10 @@ Q_SIGNALS:
      * @brief redlineDeleted. This signal is emitted when a redline is deleted
      * @param redline
      */
-    void redlineDeleted(Redline &redline);
+    void redlineDeleted(Redline redline);
+
+
+    void tooltipForElement(QString el, QString &tooltip);
 
 
 

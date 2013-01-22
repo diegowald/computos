@@ -154,6 +154,8 @@ PdfView::PdfView(QWidget *parent)
     setRenderHint(Poppler::Document::TextAntialiasing, true);
     setRenderHint(Poppler::Document::Antialiasing, true);
     setRenderBackend(Poppler::Document::RenderBackend(0));
+    setAttribute(Qt::WA_AlwaysShowToolTips);
+
     connect(d, SIGNAL(scrollPositionChanged(qreal,int)), this, SIGNAL(scrollPositionChanged(qreal,int)));
     connect(d, SIGNAL(openTexDocument(QString,int)), this, SIGNAL(openTexDocument(QString,int)));
     connect(d, SIGNAL(mouseToolChanged(PdfView::MouseTool)), this, SIGNAL(mouseToolChanged(PdfView::MouseTool)));
@@ -995,6 +997,7 @@ void PdfView::createRedLiningHandler()
     connect(d->m_redliningHandler, SIGNAL(redlineUpdated(Redline)), d, SLOT(redlineUpdated(Redline)));
     connect(d->m_redliningHandler, SIGNAL(redlineCreated(Redline&)), this, SIGNAL(redlineCreated(Redline&)));
     connect(d->m_redliningHandler, SIGNAL(redlineDeleted(Redline)), this, SIGNAL(redlineDeleted(Redline)));
+    connect(d->m_redliningHandler, SIGNAL(tooltipForElement(QString,QString&)), this, SIGNAL(tooltipForElement(QString,QString&)));
     if (!d->m_popplerDocument)
         d->m_redliningHandler->action(0)->setEnabled(false);
 }
@@ -1433,7 +1436,7 @@ selectionRect.height() * scaleFactorY());
     }
 }
 
-Redline PdfViewPrivate::redline() const
+Redline PdfViewPrivate::redline()
 {
     return m_Redline;
 }
@@ -1538,18 +1541,19 @@ void PdfView::slotPrint()
 void PdfViewPrivate::redlineUpdated(Redline redline)
 {
     QRectF r = q->mapFromPage(redline.pageNumber, redline.rect);
-    m_redlineRects.push_back(
-                m_pageScene->addRect(r,
-                                     QPen(QBrush(QColor(redline.color.red(),
-                                                        redline.color.green(),
-                                                        redline.color.blue(),
-                                                        100)), 1),
-                                     QBrush(QColor(redline.color.red(),
-                                                   redline.color.green(),
-                                                   redline.color.blue(),
-                                                   100))));
-                                     //QPen(QBrush(QColor(100, 0, 0, 100)), 1),
-                                     //QBrush(QColor(100, 0, 0, 100))));
+    QGraphicsRectItem * rect = m_pageScene->addRect(r,
+                                                    QPen(QBrush(QColor(redline.color.red(),
+                                                                       redline.color.green(),
+                                                                       redline.color.blue(),
+                                                                       100)), 1),
+                                                    QBrush(QColor(redline.color.red(),
+                                                                  redline.color.green(),
+                                                                  redline.color.blue(),
+                                                                  100)));
+                                                                    //QPen(QBrush(QColor(100, 0, 0, 100)), 1),
+                                                                    //QBrush(QColor(100, 0, 0, 100))));
+
+    m_redlineRects.push_back(rect);
     QGraphicsTextItem *lbl = m_pageScene->addText(redline.name);
     lbl->setPos(r.center());
     m_redlineRects.at(m_redlineRects.size() - 1)->setZValue(3);
@@ -1580,7 +1584,7 @@ void PdfViewPrivate::reloadRedlines()
     }
 }
 
-void PdfViewPrivate::setRedlines(QList<Redline> redlines)
+void PdfViewPrivate::setRedlines(QList<Redline> &redlines)
 {
     foreach(Redline line, redlines)
     {
@@ -1808,10 +1812,18 @@ void PdfView::mouseMoveEvent(QMouseEvent *event)
         QToolTip::showText(mapToGlobal(event->pos()), PageItem::toolTipText(), this);
 #endif // QT_NO_TOOLTIP
     }
+
 #ifndef QT_NO_TOOLTIP
+/*    else
+        QToolTip::hideText();
+    //DIEGO
+    QToolTip::showText(mapToGlobal(event->pos()), "Diego Master", this);
+*/
+#endif // QT_NO_TOOLTIP
+    if (d->m_redliningHandler->isRedLineHovered(mapToScene(event->pos())))
+        QToolTip::showText(mapToGlobal(event->pos()), d->m_redliningHandler->getTooltipText(mapToScene(event->pos())), this);
     else
         QToolTip::hideText();
-#endif // QT_NO_TOOLTIP
 }
 
 void PdfView::mouseReleaseEvent(QMouseEvent *event)

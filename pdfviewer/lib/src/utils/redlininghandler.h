@@ -27,12 +27,12 @@ public:
         return new QWidget();
     }
 
-    virtual Redline redline() const
+    virtual Redline redline()
     {
         return Redline();
     }
 
-    virtual void setRedlines(QList<Redline>)
+    virtual void setRedlines(QList<Redline> &)
     {
     }
 };
@@ -118,7 +118,7 @@ public:
      * is invalid.
      */
     //void removeRedlineAtPosition(double pos);
-    void removeRedline(Redline redline);
+    void removeRedline(Redline &redline);
 
     /**
      * Empties the list of redlines. This function does <em>not</em> store
@@ -157,7 +157,10 @@ public:
      */
     void saveRedlines();
 
-    void appendRedline(Redline redline);
+    void appendRedline(Redline &redline);
+
+    bool isRedLineHovered(QPointF pos);
+    QString getTooltipText(QPointF pos);
 
 Q_SIGNALS:
     /**
@@ -178,6 +181,8 @@ Q_SIGNALS:
 
     void redlineCreated(Redline &redline);
     void redlineDeleted(Redline redline);
+
+    void tooltipForElement(QString el, QString &tooltip);
 
     /**
      * When this signal is emitted, the BookmarksWidget object should be

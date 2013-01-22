@@ -75,13 +75,13 @@ public:
 	void removeTextSelection();
     void handleRedlining(const QPoint &popupMenuPos);
     void reloadRedlines();
-    virtual void setRedlines(QList<Redline> redlines);
+    virtual void setRedlines(QList<Redline> &redlines);
 #ifdef USE_SYNCTEX
 	void synctexClick(const QPointF &scenePos);
 #endif // USE_SYNCTEX
 	void scroll(int delta);
 
-    virtual Redline redline() const;
+    virtual Redline redline();
 
 public Q_SLOTS:
 	void slotSelectMouseTool();

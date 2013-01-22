@@ -31,6 +31,7 @@ void wndPDFViewer::initialize(QString filename)
     }
     connect(ui->pdfView, SIGNAL(redlineCreated(Redline&)), this, SLOT(redlineCreated(Redline&)));
     connect(ui->pdfView, SIGNAL(redlineDeleted(Redline)), this, SLOT(redlineDeleted(Redline)));
+    connect(ui->pdfView, SIGNAL(tooltipForElement(QString,QString&)), this, SLOT(tooltipForElement(QString,QString&)));
 }
 
 void wndPDFViewer::createActions()
@@ -78,4 +79,10 @@ void wndPDFViewer::redlineCreated(Redline &redline)
 
 void wndPDFViewer::redlineDeleted(Redline redline)
 {
+}
+
+
+void wndPDFViewer::tooltipForElement(QString el, QString &tooltip)
+{
+    tooltip = el;
 }
