@@ -64,6 +64,8 @@
 #include <QtGui/QToolTip>
 #endif // QT_NO_TOOLTIP
 
+
+#include <QDebug>
 // add copyright notice to the *.ts files; this string is not used anywhere else
 static struct { const char *source; const char *comment; } copyrightString
     = QT_TRANSLATE_NOOP3("__Copyright__",
@@ -1820,6 +1822,10 @@ void PdfView::mouseMoveEvent(QMouseEvent *event)
     QToolTip::showText(mapToGlobal(event->pos()), "Diego Master", this);
 */
 #endif // QT_NO_TOOLTIP
+    qDebug() << event->pos().x();
+    qDebug() << event->pos().y();
+    qDebug() << mapToScene(event->pos()).x();
+    qDebug() << mapToScene(event->pos()).y();
     if (d->m_redliningHandler->isRedLineHovered(mapToScene(event->pos())))
         QToolTip::showText(mapToGlobal(event->pos()), d->m_redliningHandler->getTooltipText(mapToScene(event->pos())), this);
     else

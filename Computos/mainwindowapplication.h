@@ -2,7 +2,7 @@
 #define MAINWINDOWAPPLICATOIN_H
 
 #include <QMainWindow>
-
+#include <QMdiSubWindow>
 #include "materialdockwindow.h"
 
 
@@ -45,6 +45,7 @@ private slots:
     void on_openBrowser(QString &search);
     void on_action_Add_PDF_Document_triggered();
     void on_actionOpen_PDF_triggered();
+    void on_mdiArea_subWindowActivated(QMdiSubWindow *arg1);
 };
 
 #endif // MAINWINDOWAPPLICATOIN_H

@@ -78,6 +78,7 @@ MainWindowApplication::MainWindowApplication(QWidget *parent) :
     connect(ui->actionEdit_Material_defiinition, SIGNAL(triggered()), this, SLOT(editMaterialLibrary()));
 
     connect(ui->actionE_xit, SIGNAL(triggered()), this, SLOT(exitApp()));
+    on_mdiArea_subWindowActivated(NULL);
 }
 
 
@@ -313,4 +314,15 @@ void MainWindowApplication::on_actionOpen_PDF_triggered()
             pdf->activateWindow();
         }
     }
+}
+
+void MainWindowApplication::on_mdiArea_subWindowActivated(QMdiSubWindow *arg1)
+{
+    ProjectWindow *w = NULL;
+    if (arg1 != NULL)
+        w = qobject_cast<ProjectWindow *>(arg1->widget());
+
+    bool enableMenus = (w != NULL);
+    ui->menuP_DFs->setEnabled(enableMenus);
+    ui->menu_Cost_Analysis->setEnabled(enableMenus);
 }
