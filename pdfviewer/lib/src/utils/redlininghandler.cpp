@@ -231,6 +231,7 @@ QString RedliningHandler::getTooltipText(QPointF pos)
                 tooltipToShow += tooltip + "\n";
         }
     }
+    tooltipToShow = tooltipToShow.remove(tooltipToShow.length() - 1, 1);
     return tooltipToShow;
 }
 

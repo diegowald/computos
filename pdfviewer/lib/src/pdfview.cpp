@@ -1826,7 +1826,10 @@ void PdfView::mouseMoveEvent(QMouseEvent *event)
     qDebug() << event->pos().y();
     qDebug() << mapToScene(event->pos()).x();
     qDebug() << mapToScene(event->pos()).y();
-    if (d->m_redliningHandler->isRedLineHovered(mapToScene(event->pos())))
+
+    QPointF pt = mapToScene(event->pos());
+    pt = mapToCurrentPage(pt);
+    if (d->m_redliningHandler->isRedLineHovered(pt))
         QToolTip::showText(mapToGlobal(event->pos()), d->m_redliningHandler->getTooltipText(mapToScene(event->pos())), this);
     else
         QToolTip::hideText();
