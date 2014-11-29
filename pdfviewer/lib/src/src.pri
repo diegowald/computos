@@ -1,5 +1,5 @@
 DEFINES += PDFVIEWLIB_PRINT_PROGRAM=\\\"$${PDFVIEWLIB_PRINT_PROGRAM}\\\"
-LIBS += -lpoppler-qt4 -lz
+LIBS += -lpoppler-qt5 -lz
 
 win32 {
 	INCLUDEPATH += $${_PRO_FILE_PWD_}/win32

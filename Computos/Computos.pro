@@ -6,15 +6,15 @@
 
 QT       += core gui network
 
-lessThan(QT_MAJOR_VERSION, 5): QT *= webkit
-greaterThan(QT_MAJOR_VERSION, 4): QT *= webkitwidgets
-greaterThan(QT_MAJOR_VERSION, 4): QT *= widgets
-greaterThan(QT_MAJOR_VERSION, 4): QT *= printsupport
+lessThan(QT_MAJOR_VERSION, 5): QT += webkit
+greaterThan(QT_MAJOR_VERSION, 4): QT += webkitwidgets
+greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
+greaterThan(QT_MAJOR_VERSION, 4): QT += printsupport
+
+CONFIG += c++11
 
 LIBS += -lpdfviewd
-
-greaterThan(QT_MAJOR_VERSION, 4): LIBS += -L/home/diego/diego-Projects/pdfviewer-build-Desktop_Qt_5_0_0_GCC_64bit_SDK-Debug/lib
-lessThan(QT_MAJOR_VERSION, 5): LIBS += -L./
+LIBS += -L./
 
 ORGNAME = "mksIngenieria"
 APPNAME = "Computos"

@@ -18,8 +18,8 @@
 #ifndef PDFVIEWER_PRINTHANDLER_H
 #define PDFVIEWER_PRINTHANDLER_H
 
-#include <QtGui/QWidget>
-#include <poppler-qt4.h>
+#include <QWidget>
+#include <poppler-qt5.h>
 
 class QComboBox;
 class QRadioButton;

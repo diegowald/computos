@@ -18,7 +18,7 @@
 
 #include "bookmarkshandler.h"
 
-#include <QtGui/QMenu>
+#include <QMenu>
 #include "filesettings.h"
 //#include "icon.h"
 //#include "../shortcuthandler/shortcuthandler.h"

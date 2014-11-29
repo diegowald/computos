@@ -37,7 +37,7 @@
 #include <QtGui/QMouseEvent>
 #endif // QT_NO_WHEELEVENT
 
-#include <poppler-qt4.h>
+#include <poppler-qt5.h>
 
 PresentationWidget::PresentationWidget(QWidget *parent)
 	: QWidget(0, Qt::FramelessWindowHint) // parent must be 0, to have an independent widget

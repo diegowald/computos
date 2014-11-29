@@ -18,18 +18,18 @@
 #include <QDebug>
 #include "printhandler.h"
 
-#include <poppler-qt4.h>
+#include <poppler-qt5.h>
 #include <poppler-form.h>
 
 #include <QtCore/QPointer>
 #include <QtCore/QProcess>
-#include <QtGui/QComboBox>
-#include <QtGui/QGridLayout>
-#include <QtGui/QGroupBox>
-#include <QtGui/QPrintDialog>
-#include <QtGui/QPrinter>
-#include <QtGui/QMessageBox>
-#include <QtGui/QRadioButton>
+#include <QComboBox>
+#include <QGridLayout>
+#include <QGroupBox>
+#include <QPrintDialog>
+#include <QPrinter>
+#include <QMessageBox>
+#include <QRadioButton>
 
 PrintHandler::PrintHandler(QWidget *parent)
 	: QObject(parent)
@@ -218,7 +218,7 @@ void PrintHandler::print(Poppler::Document *popplerDocument, QList<Poppler::Page
 					tr("Cannot print to file:\n%1").arg(printer.outputFileName()),
 					QMessageBox::Ok, parentWidget);
 		}
-		else if (printer.outputFormat() == QPrinter::PostScriptFormat)
+        else if (printer.outputFormat() == QPrinter::NativeFormat/*PostScriptFormat*/)
 		{
 			// get the real page size to pass to the ps generator
 			QPrinter dummy(QPrinter::PrinterResolution);

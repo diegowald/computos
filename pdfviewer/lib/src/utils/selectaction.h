@@ -19,7 +19,7 @@
 #ifndef SELECTACTION_H
 #define SELECTACTION_H
 
-#include <QtGui/QWidgetAction>
+#include <QWidgetAction>
 
 class QComboBox;
 class QIcon;

@@ -1,4 +1,4 @@
-#include <QtGui/QApplication>
+#include <QApplication>
 #include <QTranslator>
 #include <QLocale>
 #include "mainwindowapplication.h"
@@ -28,10 +28,11 @@ void createUpdateFile()
 
 int main(int argc, char *argv[])
 {
+
+    QApplication a(argc, argv);
     QCoreApplication::setApplicationName(APPNAME);
     QCoreApplication::setOrganizationName(ORGNAME);
 
-    QApplication a(argc, argv);
     QTranslator appTranslator;
 
     DataStore::getInstance()->setParent(&a);

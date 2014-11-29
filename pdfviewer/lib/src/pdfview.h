@@ -18,7 +18,7 @@
 #ifndef PDFVIEWER_PDFVIEW_H
 #define PDFVIEWER_PDFVIEW_H
 
-#include <QtGui/QGraphicsView>
+#include <QGraphicsView>
 //#include <poppler-qt4.h>
 #include <poppler/qt4/poppler-qt4.h>
 #include "utils/redlininghandler.h"

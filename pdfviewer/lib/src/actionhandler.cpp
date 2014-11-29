@@ -20,7 +20,7 @@
 #include "utils/selectpageaction.h"
 #include "utils/zoomaction.h"
 
-#include <QtGui/QAction>
+#include <QAction>
 
 ActionHandler::ActionHandler(QWidget *parent)
 	: QObject(parent)

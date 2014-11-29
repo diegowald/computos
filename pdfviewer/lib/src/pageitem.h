@@ -20,7 +20,7 @@
 #define PDFVIEWER_PAGEITEM_H
 
 #include <QtCore/QObject>
-#include <poppler-qt4.h>
+#include <poppler-qt5.h>
 
 struct Link
 {

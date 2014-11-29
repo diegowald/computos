@@ -29,7 +29,7 @@
 #include <QTextEdit>
 #include <poppler/qt4/poppler-qt4.h>
 #include <poppler/qt4/poppler-form.h>
-/*#include <poppler-qt4.h>
+/*#include <poppler-qt5.h>
 #include <poppler-form.h>*/
 
 bool PageItem::s_isLinkHovered;

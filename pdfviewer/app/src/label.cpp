@@ -19,7 +19,7 @@
 #include <QDebug>
 #include "label.h"
 
-#include <poppler-qt4.h>
+#include <poppler-qt5.h>
 
 #include <QtCore/QUrl>
 #include <QtGui/QApplication>

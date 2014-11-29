@@ -19,7 +19,7 @@
 #ifndef BOOKMARKSHANDLER_H
 #define BOOKMARKSHANDLER_H
 
-#include <QtGui/QWidget>
+#include <QWidget>
 
 class QMenu;
 

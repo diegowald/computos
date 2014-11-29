@@ -18,10 +18,10 @@
 
 #include "selectaction.h"
 
-#include <QtGui/QComboBox>
-#include <QtGui/QIcon>
-#include <QtGui/QLineEdit>
-#include <QtGui/QWidgetAction>
+#include <QComboBox>
+#include <QIcon>
+#include <QLineEdit>
+#include <QWidgetAction>
 
 SelectAction::SelectAction(QObject *parent, const QString &name)
 	: QWidgetAction(parent)

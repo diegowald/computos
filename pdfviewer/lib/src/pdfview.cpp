@@ -32,7 +32,7 @@
 #include "utils/selectpageaction.h"
 #include "utils/zoomaction.h"
 
-#include <poppler-qt4.h>
+#include <poppler-qt5.h>
 #include <poppler-form.h>
 
 #include <QtCore/QFileInfo>
@@ -45,23 +45,23 @@
 #include <QtGui/QDesktopServices>
 #include <QtGui/QImage>
 #include <QtGui/QKeyEvent>
-#include <QtGui/QLineEdit>
+#include <QLineEdit>
 #include <QtGui/QPixmap>
-#include <QtGui/QPrintDialog>
-#include <QtGui/QPrinter>
-#include <QtGui/QApplication>
-#include <QtGui/QDesktopWidget>
-#include <QtGui/QFileDialog>
-#include <QtGui/QGraphicsPixmapItem>
-#include <QtGui/QGraphicsProxyWidget>
-#include <QtGui/QMenu>
-#include <QtGui/QMessageBox>
-#include <QtGui/QPushButton>
-#include <QtGui/QScrollBar>
-#include <QtGui/QStyle>
-#include <QtGui/QTextEdit>
+#include <QPrintDialog>
+#include <QPrinter>
+#include <QApplication>
+#include <QDesktopWidget>
+#include <QFileDialog>
+#include <QGraphicsPixmapItem>
+#include <QGraphicsProxyWidget>
+#include <QMenu>
+#include <QMessageBox>
+#include <QPushButton>
+#include <QScrollBar>
+#include <QStyle>
+#include <QTextEdit>
 #ifndef QT_NO_TOOLTIP
-#include <QtGui/QToolTip>
+#include <QToolTip>
 #endif // QT_NO_TOOLTIP
 
 

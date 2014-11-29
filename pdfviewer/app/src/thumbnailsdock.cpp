@@ -20,7 +20,7 @@
 
 #include "thumbnailsdock.h"
 
-#include <poppler-qt4.h>
+#include <poppler-qt5.h>
 
 #include <QtGui/QListWidget>
 

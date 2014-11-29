@@ -18,9 +18,9 @@
 
 #include "selectpageaction.h"
 
-#include <QtGui/QHBoxLayout>
-#include <QtGui/QLabel>
-#include <QtGui/QSpinBox>
+#include <QHBoxLayout>
+#include <QLabel>
+#include <QSpinBox>
 
 SelectPageAction::SelectPageAction(QObject *parent, const QString &name)
 	: SelectAction(parent)

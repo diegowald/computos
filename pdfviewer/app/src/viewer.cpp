@@ -40,7 +40,7 @@
 
 #include <pdfview.h>
 
-#include <poppler-qt4.h>
+#include <poppler-qt5.h>
 
 #include <QtCore/QDir>
 #include <QtCore/QFileSystemWatcher>

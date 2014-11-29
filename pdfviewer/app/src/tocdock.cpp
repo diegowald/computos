@@ -19,7 +19,7 @@
 
 #include "tocdock.h"
 
-#include <poppler-qt4.h>
+#include <poppler-qt5.h>
 
 #include <QtGui/QHeaderView>
 #include <QtGui/QTreeWidget>

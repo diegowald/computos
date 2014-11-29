@@ -22,7 +22,7 @@
 #include "pageitem.h"
 #include "utils/bookmarkshandler.h"
 #include "utils/redlininghandler.h"
-#include <poppler-qt4.h>
+#include <poppler-qt5.h>
 
 //class PdfView;
 //class PageItem;

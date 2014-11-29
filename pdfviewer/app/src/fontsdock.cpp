@@ -19,7 +19,7 @@
 
 #include "fontsdock.h"
 
-#include <poppler-qt4.h>
+#include <poppler-qt5.h>
 
 #include <QtCore/QCoreApplication>
 #include <QtGui/QTableWidget>

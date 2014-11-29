@@ -47,7 +47,7 @@ QString XMLNode::getChildValue(QString key, bool mandatory, QString defaultValue
         XMLNode_ptr node = getChildNode(key, true);
         return node->Value();
     }
-    catch (xml::XMLKeyNotFoundException *ex)
+    catch (xml::XMLKeyNotFoundException *)
     {
         if (mandatory)
             throw;

@@ -3,9 +3,10 @@ TARGET = pdfviewd
 VERSION = 0.6.1
 QT += core gui xml
 
-greaterThan(QT_MAJOR_VERSION, 4): QT *= widgets
-greaterThan(QT_MAJOR_VERSION, 4): QT *= printsupport
+greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
+greaterThan(QT_MAJOR_VERSION, 4): QT += printsupport
 
+CONFIG += c++11
 
 include(qmake/pdfviewlibconfig.pri)
 include(qmake/pdfviewlibdefaults.pri)
@@ -15,13 +16,13 @@ include(qmake/pdfviewlibdefaults.pri)
 #DEFINES -= QT_NO_STL QT3_SUPPORT
 
 #CONFIG -= debug_and_release build_all warn_on
-#CONFIG += debug
+CONFIG += debug
 #CONFIG += release
 CONFIG -= debug_and_release warn_on
 
 unix {
 	CONFIG += link_pkgconfig
-	PKGCONFIG += poppler-qt4
+        PKGCONFIG += poppler-qt5
 }
 use_synctex {
 	DEFINES += USE_SYNCTEX
